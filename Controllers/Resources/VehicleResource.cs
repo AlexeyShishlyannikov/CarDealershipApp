@@ -6,7 +6,10 @@ namespace AutoCity.Controllers.Resources
     public class VehicleResource
     {
         public int Id { get; set; }
-		public Model Model { get; set; }
+		public int ModelId { get; set; }
+		public KeyValuePairResource Model { get; set; }
+		public KeyValuePairResource Make { get; set; }
+
 		public DateTime YearMade { get; set; }
 		public DateTime LastUpdate { get; set; }
 		public int Price { get; set; }
