@@ -13,7 +13,8 @@ namespace AutoCity.Mapping
 				.ForMember(vr => vr.Make, opt => opt.MapFrom(v => v.Model.Make));
 
 			// API Mapping : Resource to Domain
-			CreateMap<VehicleResource, Vehicle>();
+			CreateMap<VehicleResource, Vehicle>()
+				.ForMember(v => v.Id, opt => opt.Ignore());
 
 		}
 
