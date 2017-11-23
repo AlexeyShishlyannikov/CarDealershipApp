@@ -1,11 +1,11 @@
 using System;
+using AutoCity.Core.Models;
 
-namespace AutoCity.Core.Models
+namespace AutoCity.Controllers.Resources
 {
-    public class Vehicle
+    public class VehicleResource
     {
         public int Id { get; set; }
-		public int ModelId { get; set; }
 		public Model Model { get; set; }
 		public DateTime YearMade { get; set; }
 		public DateTime LastUpdate { get; set; }
@@ -15,10 +15,5 @@ namespace AutoCity.Core.Models
 		public int Mileage { get; set; }
 		public string Color { get; set; }
 		public int MPG { get; set; }
-
-		public Vehicle()
-		{
-			
-		}
-    }
+	}
 }
