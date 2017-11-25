@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoCity.Core.Models;
 using AutoCity.Persistance;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
@@ -25,6 +26,7 @@ namespace AutoCity
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+			services.Configure<PhotoSettings>(Configuration.GetSection("PhotoSettings"));
 
 			services.AddAutoMapper();
 

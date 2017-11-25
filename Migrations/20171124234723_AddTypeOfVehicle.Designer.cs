@@ -11,37 +11,15 @@ using System;
 namespace AutoCity.Migrations
 {
     [DbContext(typeof(AutoCityDbContext))]
-    partial class AutoCityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171124234723_AddTypeOfVehicle")]
+    partial class AddTypeOfVehicle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("AutoCity.Core.Models.Contacts", b =>
-                {
-                    b.Property<byte>("Id");
-
-                    b.Property<string>("City");
-
-                    b.Property<string>("ContactName");
-
-                    b.Property<string>("FacebookUrl");
-
-                    b.Property<string>("InstagramUrl");
-
-                    b.Property<string>("Phone");
-
-                    b.Property<string>("Street");
-
-                    b.Property<string>("ZipCode");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Contacts");
-                });
 
             modelBuilder.Entity("AutoCity.Core.Models.Make", b =>
                 {
@@ -75,29 +53,12 @@ namespace AutoCity.Migrations
                     b.ToTable("Models");
                 });
 
-            modelBuilder.Entity("AutoCity.Core.Models.Photos", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("FileName");
-
-                    b.Property<int>("VehicleId")
-                        .HasMaxLength(255);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Photos");
-                });
-
             modelBuilder.Entity("AutoCity.Core.Models.Vehicle", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Color");
-
-                    b.Property<string>("Features");
 
                     b.Property<DateTime>("LastUpdate");
 

@@ -11,9 +11,10 @@ using System;
 namespace AutoCity.Migrations
 {
     [DbContext(typeof(AutoCityDbContext))]
-    partial class AutoCityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171125181619_SeedContactInfo")]
+    partial class SeedContactInfo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,21 +74,6 @@ namespace AutoCity.Migrations
                     b.HasIndex("MakeId");
 
                     b.ToTable("Models");
-                });
-
-            modelBuilder.Entity("AutoCity.Core.Models.Photos", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("FileName");
-
-                    b.Property<int>("VehicleId")
-                        .HasMaxLength(255);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Photos");
                 });
 
             modelBuilder.Entity("AutoCity.Core.Models.Vehicle", b =>

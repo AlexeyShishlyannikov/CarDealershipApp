@@ -11,11 +11,14 @@ namespace AutoCity.Mapping
 			// API Mapping : Domain to Resource
 			CreateMap<Vehicle, VehicleResource>()
 				.ForMember(vr => vr.Make, opt => opt.MapFrom(v => v.Model.Make));
+			CreateMap<Contacts, ContactsResource>();
+			CreateMap<Photo, PhotoResource>();
 
 			// API Mapping : Resource to Domain
 			CreateMap<VehicleResource, Vehicle>()
 				.ForMember(v => v.Id, opt => opt.Ignore());
-
+			CreateMap<ContactsResource, Contacts>();
+			CreateMap<PhotoResource, Photo>();
 		}
 
     }

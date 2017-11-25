@@ -9,8 +9,7 @@ namespace AutoCity.Controllers.Resources
 		public int ModelId { get; set; }
 		public KeyValuePairResource Model { get; set; }
 		public KeyValuePairResource Make { get; set; }
-
-		public DateTime YearMade { get; set; }
+		public int YearMade { get; set; }
 		public DateTime LastUpdate { get; set; }
 		public int Price { get; set; }
 		public string VinNumber { get; set; }
@@ -18,5 +17,6 @@ namespace AutoCity.Controllers.Resources
 		public int Mileage { get; set; }
 		public string Color { get; set; }
 		public int MPG { get; set; }
+		public string Features { get; set; }
 	}
 }

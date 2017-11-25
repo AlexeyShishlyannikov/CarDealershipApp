@@ -23,7 +23,7 @@ namespace AutoCity.Migrations
                     Price = table.Column<int>(nullable: false),
                     TransmissionType = table.Column<string>(nullable: true),
                     VinNumber = table.Column<string>(nullable: true),
-                    YearMade = table.Column<DateTime>(nullable: false)
+                    YearMade = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
