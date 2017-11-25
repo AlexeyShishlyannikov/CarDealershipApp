@@ -25,6 +25,7 @@ namespace AutoCity.Controllers
 		private readonly PhotoSettings photoSettings;
 		public PhotosController(IHostingEnvironment host, IMapper mapper, IOptionsSnapshot<PhotoSettings> options, AutoCityDbContext context)
 		{
+			this.photoSettings = options.Value;
 			this.context = context;
 			this.options = options;
 			this.mapper = mapper;
@@ -35,23 +36,23 @@ namespace AutoCity.Controllers
 		{
 			var photos = await context.Photos.Where(p => p.VehicleId == vehicleId).ToListAsync();
 
-			return mapper.Map<IEnumerable<Photo>,IEnumerable<PhotoResource>>(photos);
+			return mapper.Map<IEnumerable<Photo>, IEnumerable<PhotoResource>>(photos);
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> UploadPhoto(int vehicleId, IFormFile file)
 		{
 			var vehicle = await context.Vehicles.SingleOrDefaultAsync(v => v.Id == vehicleId);
-			if(vehicle == null)
+			if (vehicle == null)
 				return NotFound();
-			if(file == null)
+			if (file == null)
 				return BadRequest("Null file");
-			
-			if(file.Length == 0 || file.Length > photoSettings.MaxBytes) return BadRequest("Wrong File size(over 10mb)");
-			if(!photoSettings.isSupported(file.FileName)) return BadRequest("Invalid file type");
+
+			if (file.Length == 0 || file.Length > photoSettings.MaxBytes) return BadRequest("Wrong File size(over 10mb)");
+			if (!photoSettings.isSupported(file.FileName)) return BadRequest("Invalid file type");
 
 			var uploadsFolderPath = Path.Combine(host.WebRootPath, "uploads");
-			if(!Directory.Exists(uploadsFolderPath))
+			if (!Directory.Exists(uploadsFolderPath))
 				Directory.CreateDirectory(uploadsFolderPath);
 			var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
 			var filePath = Path.Combine(uploadsFolderPath, fileName);
@@ -61,11 +62,32 @@ namespace AutoCity.Controllers
 				await file.CopyToAsync(stream);
 			}
 
-			var photo = new Photo {FileName = fileName};
+			var photo = new Photo { FileName = fileName };
 			vehicle.Photos.Add(photo);
 			await context.SaveChangesAsync();
 
 			return Ok(mapper.Map<Photo, PhotoResource>(photo));
+		}
+		[HttpDelete("{photoId}")]
+		public async Task<IActionResult> DeletePhoto(int vehicleId, int photoId)
+		{
+			var vehicle = await context.Vehicles.SingleOrDefaultAsync(v => v.Id == vehicleId);
+			if (vehicle == null)
+				return NotFound();
+			var uploadsFolderPath = Path.Combine(host.WebRootPath, "uploads");
+			var photo = await context.Photos.Where(p => p.VehicleId == vehicleId).SingleOrDefaultAsync(p => p.Id == photoId);
+			if (photo == null)
+				return NotFound();
+			var filePath = Path.Combine(uploadsFolderPath, photo.FileName);
+			if(System.IO.File.Exists(filePath))
+			{
+				System.IO.File.Delete(filePath);
+				context.Remove(photo);
+				await context.SaveChangesAsync();
+			}
+			else
+				return BadRequest();
+			return Ok(filePath + " Deleted");
 		}
 	}
 }
