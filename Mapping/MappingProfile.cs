@@ -14,15 +14,16 @@ namespace AutoCity.Mapping
 			CreateMap<Contacts, ContactsResource>();
 			CreateMap<Photo, PhotoResource>();
 			CreateMap<Model, ModelResource>();
+			CreateMap<Make, MakeResource>();
 
 			// API Mapping : Resource to Domain
 			CreateMap<VehicleResource, Vehicle>()
 				.ForMember(v => v.Id, opt => opt.Ignore());
 			CreateMap<ContactsResource, Contacts>()
-				.ForMember(v => v.Id, opt => opt.Ignore());			;
+				.ForMember(v => v.Id, opt => opt.Ignore());	
 			CreateMap<PhotoResource, Photo>();
 			CreateMap<ModelResource, Model>()
-				.ForMember(v => v.Id, opt => opt.Ignore());			;
+				.ForMember(v => v.Id, opt => opt.Ignore());
 		}
 
     }
