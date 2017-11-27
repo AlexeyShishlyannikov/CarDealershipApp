@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AutoCity.Controllers
 {
+	[Route("/api/contacts/")]
 	public class ContactsController : Controller
 	{
 		private readonly AutoCityDbContext context;
@@ -28,6 +29,12 @@ namespace AutoCity.Controllers
 			await context.SaveChangesAsync();
 
 			return Ok(contactsResource);
+		}
+		[HttpGet]
+		public async Task<IActionResult> GetContacts()
+		{
+			var contacts = await context.Contacts.FirstAsync();
+			return Ok(mapper.Map<Contacts,ContactsResource>(contacts));
 		}
 	}
 }

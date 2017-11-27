@@ -16,3 +16,16 @@ export interface Vehicle {
 	mpg: number,
 	features: string
 }
+
+export interface SaveVehicle {
+	id?: number,
+	modelId: number,
+	yearMade: number,
+	price: number,
+	vinNumber: string,
+	transmissionType: string,
+	mileage: number,
+	color: string,
+	mpg: number,
+	features: string
+}
