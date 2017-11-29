@@ -1,7 +1,7 @@
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
-import { Vehicle } from '../models/vehicle';
+import { Vehicle, SaveVehicle } from '../models/vehicle';
 import { Model } from '../models/model';
 
 @Injectable()
@@ -32,8 +32,8 @@ export class VehicleService {
 		return this.http.put(`/api/vehicles/${id}`, vehicle)
 			.map(res => res.json());
 	}
-	public addVehicle(id: number, vehicle: Vehicle) {
-		return this.http.post(`/api/vehicles/${id}`, vehicle)
+	public addVehicle(vehicle: SaveVehicle) {
+		return this.http.post(`/api/vehicles/`, vehicle)
 			.map(res => res.json());
 	}
 	public deleteVehicle(id: number){

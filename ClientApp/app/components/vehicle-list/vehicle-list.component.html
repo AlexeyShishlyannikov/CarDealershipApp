@@ -1,3 +1,19 @@
-<p>
-  vehicle-list works!
-</p>
+<a [routerLink]="['/vehicles/new']" class="btn btn-primary">New Vehicle</a>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Model</th>
+			<th>Make</th>
+			<th>Year Made</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let v of vehicles">
+			<td>{{v.id}}</td>
+			<td>{{v.model.name}}</td>
+			<td>{{v.make.name}}</td>
+			<td>{{v.yearMade}}</td>
+		</tr>
+	</tbody>
+</table>

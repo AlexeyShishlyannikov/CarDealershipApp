@@ -1,5 +1,5 @@
 import { Contact } from './../models/contact';
-import { Http } from '@angular/http/src/http';
+import { Http } from '@angular/http/';
 import { Injectable } from '@angular/core';
 
 @Injectable()

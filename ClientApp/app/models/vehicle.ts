@@ -19,6 +19,7 @@ export interface Vehicle {
 
 export interface SaveVehicle {
 	id?: number,
+	makeId: number,
 	modelId: number,
 	yearMade: number,
 	price: number,

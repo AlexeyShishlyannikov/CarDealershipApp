@@ -1,3 +1,4 @@
+import { ContactService } from './services/contact.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -7,18 +8,18 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
-import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
-import { CounterComponent } from './components/counter/counter.component';
 import { VehicleListComponent } from './components/vehicle-list/vehicle-list.component';
+import { VehicleService } from './services/vehicle.service';
+import { ModelService } from './services/model.service';
+import { VehicleFormComponent } from './components/vehicle-form/vehicle-form.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavMenuComponent,
-        CounterComponent,
-        FetchDataComponent,
         HomeComponent,
-        VehicleListComponent
+        VehicleListComponent,
+        VehicleFormComponent
     ],
     imports: [
         CommonModule,
@@ -26,12 +27,17 @@ import { VehicleListComponent } from './components/vehicle-list/vehicle-list.com
         FormsModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
-            { path: 'home', component: HomeComponent },
-            { path: 'counter', component: CounterComponent },
-            { path: 'fetch-data', component: FetchDataComponent },
+			{ path: 'home', component: HomeComponent },
+			{ path: 'vehicles/new', component: VehicleFormComponent },
+			{ path: 'vehicles', component: VehicleListComponent },
             { path: '**', redirectTo: 'home' }
         ])
-    ]
+	],
+	providers: [
+		VehicleService,
+		ModelService,
+		ContactService
+	]
 })
 export class AppModuleShared {
 }
