@@ -36,41 +36,44 @@
 	</div>
 	<div class="form-group">
 		<label for="yearMade">Year Made</label>
-		<input type="number" id="yearMade" [(ngModel)]="vehicle.yearMade" class="form-control" name="yearMade" required>
-		<div class="alert alert-danger" *ngIf="yearMade?.touched && !yearMade.valid">Please specify the year.</div>
+		<input type="number" id="yearMade" [(ngModel)]="vehicle.yearMade" class="form-control" name="yearMade" required #yearMade="ngModel">
+		<div class="alert alert-danger" *ngIf="yearMade.touched && !yearMade.valid">Please specify the year.</div>
 	</div>
 	<div class="form-group">
 		<label for="transmissionType">Transmission</label>
-		<select type="text" id="transmissionType" [(ngModel)]="vehicle.transmissionType" class="form-control" name="transmissionType" required transmissionType="ngModel">
+		<select type="text" id="transmissionType" [(ngModel)]="vehicle.transmissionType" class="form-control" name="transmissionType" required #transmissionType="ngModel">
 			<option value="Automatic">Automatic</option>
 			<option value="Manual">Manual</option>
 		</select>
-		<div class="alert alert-danger" *ngIf="transmissionType?.touched && !transmissionType.valid">Please specify the year.</div>
+		<div class="alert alert-danger" *ngIf="transmissionType.touched && !transmissionType.valid">Please specify the year.</div>
 	</div>
 	<div class="form-group">
 		<label for="color">Color</label>
-		<input type="text" id="color" [(ngModel)]="vehicle.color" class="form-control" name="color" required color="ngModel">
-		<div class="alert alert-danger" *ngIf="color?.touched && !color.valid">Please specify color of the car.</div>
+		<input type="text" id="color" [(ngModel)]="vehicle.color" class="form-control" name="color" #color="ngModel">
 	</div>
 	<div class="form-group">
 		<label for="vinNumber">VIN Number</label>
-		<input type="text" id="vinNumber" [(ngModel)]="vehicle.vinNumber" class="form-control" name="vinNumber" required>
-		<div class="alert alert-danger" *ngIf="vinNumber?.touched && !vinNumber.valid">Please specify VIN Number.</div>
+		<input type="text" id="vinNumber" [(ngModel)]="vehicle.vinNumber" class="form-control" name="vinNumber" required #vinNumber="ngModel">
+		<div class="alert alert-danger" *ngIf="vinNumber.touched && !vinNumber.valid">Please specify VIN Number.</div>
 	</div>
 	<div class="form-group">
 		<label for="mpg">MPG</label>
-		<input type="number" id="mpg" [(ngModel)]="vehicle.mpg" class="form-control" name="mpg" required mpg="ngModel">
-		<div class="alert alert-danger" *ngIf="mpg?.touched && !mpg.valid">Please provide MPG.</div>
+		<input type="number" id="mpg" [(ngModel)]="vehicle.mpg" class="form-control" name="mpg" required #mpg="ngModel">
+		<div class="alert alert-danger" *ngIf="mpg.touched && !mpg.valid">Please provide MPG.</div>
 	</div>
 	<div class="form-group">
 		<label for="mileage">Mileage</label>
-		<input type="number" id="mileage" [(ngModel)]="vehicle.mileage" class="form-control" name="mileage" required mileage="ngModel">
-		<div class="alert alert-danger" *ngIf="mileage?.touched && !mileage.valid">Please provide mileage.</div>
+		<input type="number" id="mileage" [(ngModel)]="vehicle.mileage" class="form-control" name="mileage" required #mileage="ngModel">
+		<div class="alert alert-danger" *ngIf="mileage.touched && !mileage.valid">Please provide mileage.</div>
 	</div>
 	<div class="form-group">
 		<label for="features">Additional features</label>
-		<input type="text" id="features" [(ngModel)]="vehicle.features" class="form-control" name="features" required features="ngModel">
-		<div class="alert alert-danger" *ngIf="features?.touched && !features.valid">Please specify the year.</div>
+		<input type="text" id="features" [(ngModel)]="vehicle.features" class="form-control" name="features" #features="ngModel">
 	</div>
-	<button class="btn btn-primary">Submit</button>
+	<div class="form-group">
+		<label for="price">Price</label>
+		<input type="number" id="price" [(ngModel)]="vehicle.price" class="form-control" name="price" #price="ngModel" required>
+		<div class="alert alert-danger" *ngIf="mileage.touched && !mileage.valid">Please provide the price.</div>
+	</div>
+	<button class="btn btn-primary" [disabled]="!f.valid">Submit</button>
 </form>

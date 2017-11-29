@@ -3,11 +3,11 @@ export interface KeyValuePair{
 	name: string
 }
 export interface Vehicle {
-	id?: number,
-	model: KeyValuePair,
-	make: KeyValuePair,
+	id: number,
+	model: any,
+	make: any,
 	yearMade: number,
-	lastUpdate?: string,
+	lastUpdate: string,
 	price: number,
 	vinNumber: string,
 	transmissionType: string,
@@ -18,7 +18,7 @@ export interface Vehicle {
 }
 
 export interface SaveVehicle {
-	id?: number,
+	id: number,
 	makeId: number,
 	modelId: number,
 	yearMade: number,
