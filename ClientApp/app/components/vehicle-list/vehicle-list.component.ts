@@ -2,6 +2,7 @@ import { Vehicle, KeyValuePair } from './../../models/vehicle';
 import { Component, OnInit } from '@angular/core';
 import { VehicleService } from '../../services/vehicle.service';
 import { MzButtonModule, MzInputModule } from 'ng2-materialize';
+import { PhotoService } from '../../services/photo.service';
 
 
 @Component({
@@ -17,8 +18,12 @@ export class VehicleListComponent implements OnInit {
 	selectedMake: any;	
 	models: any[];
 	selectedModel: any;
+	photos: any[];
 	
-	constructor(private vehicleService: VehicleService) { }
+	constructor(
+		private vehicleService: VehicleService,
+		private photoService: PhotoService
+	) { }
 
 	ngOnInit() {
 		this.populateVehicles();
@@ -33,7 +38,13 @@ export class VehicleListComponent implements OnInit {
 		this.vehicleService.getVehicles()
 			.subscribe(vehicles => { 
 				this.vehicles = vehicles;
+				this.populatePictures();
 			});
+	}
+	private populatePictures(){
+		this.vehicles.forEach(vehicle => {
+			this.photoService.getPhotos(vehicle.id).subscribe(photos => vehicle.photos = photos);
+		});
 	}
 
 	public onSortByChange(){
@@ -62,6 +73,7 @@ export class VehicleListComponent implements OnInit {
 		this.vehicleService.getVehicles()
 			.subscribe(vehicles => {
 				this.vehicles = vehicles;
+				this.populatePictures();				
 				if (selectedMake) {
 					this.vehicles = this.vehicles.filter(function (vehicle) {
 						if (selectedModel)

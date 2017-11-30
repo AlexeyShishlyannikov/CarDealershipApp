@@ -2,5 +2,21 @@
 	background-color: rgb(255, 255, 255);
 }
 .vehicleList{
-	background-color: rgba(235, 235, 235, 0.836) ;
+	background-color: rgb(255, 254, 254) ;
+}
+li {
+	margin: 0;
+	padding: 0;
+}
+.vehicle-item{
+	margin-bottom: 5%;
+	border-bottom-color: rgba(77, 62, 62, 0.363);
+	border-bottom-width: 0.5px;
+	border-bottom-style: solid;
+}
+ul{
+	list-style: none;
+}
+li{
+	
 }

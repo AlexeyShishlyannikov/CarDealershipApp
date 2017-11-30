@@ -14,6 +14,7 @@ import { ModelService } from './services/model.service';
 import { VehicleFormComponent } from './components/vehicle-form/vehicle-form.component';
 import { VehicleViewComponent } from './components/vehicle-view/vehicle-view.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { PhotoService } from './services/photo.service';
 
 @NgModule({
     declarations: [
@@ -41,7 +42,8 @@ import { FooterComponent } from './components/footer/footer.component';
 	providers: [
 		VehicleService,
 		ModelService,
-		ContactService
+		ContactService,
+		PhotoService
 	]
 })
 export class AppModuleShared {

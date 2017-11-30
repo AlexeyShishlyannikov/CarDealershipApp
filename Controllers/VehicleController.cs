@@ -93,7 +93,7 @@ namespace AutoCity.Controllers
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> DeleteVehicle(int id)
 		{
-			var vehicle = context.Vehicles.SingleOrDefaultAsync(v => v.Id == id);
+			var vehicle = await context.Vehicles.SingleOrDefaultAsync(v => v.Id == id);
 			if(vehicle == null)
 				return NotFound();
 			
