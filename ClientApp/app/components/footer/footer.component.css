@@ -1,0 +1,18 @@
+.social{
+	font-size: 200%;
+}
+.social {
+	color: black;
+	text-decoration: none;
+}
+.social:hover{
+	color: #c158dc;
+}
+.margin{
+	margin-top: 5%;
+	padding-bottom: 5%;
+	margin: 0 2.5%;
+	border: 25px;
+	background-color: rgba(255, 255, 255, 0.3);
+	
+}

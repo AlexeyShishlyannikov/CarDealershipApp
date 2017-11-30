@@ -8,12 +8,12 @@ export class ContactService {
 	constructor(private http: Http) { }
 
 	public getContacts(){
-		this.http.get("/api/contacts/")
+		return this.http.get("/api/contacts/")
 			.map(res => res.json());
 	}
 
 	public updateContacts(contacts: Contact) {
-		this.http.put("/api/contacts/", contacts)
+		return this.http.put("/api/contacts/", contacts)
 			.map(res => res.json());
 	}
 }

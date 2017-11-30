@@ -13,6 +13,7 @@ import { VehicleService } from './services/vehicle.service';
 import { ModelService } from './services/model.service';
 import { VehicleFormComponent } from './components/vehicle-form/vehicle-form.component';
 import { VehicleViewComponent } from './components/vehicle-view/vehicle-view.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
     declarations: [
@@ -21,20 +22,20 @@ import { VehicleViewComponent } from './components/vehicle-view/vehicle-view.com
         HomeComponent,
         VehicleListComponent,
         VehicleFormComponent,
-        VehicleViewComponent
+        VehicleViewComponent,
+        FooterComponent
     ],
     imports: [
         CommonModule,
         HttpModule,
-        FormsModule,
+		FormsModule,
         RouterModule.forRoot([
-            { path: '', redirectTo: 'home', pathMatch: 'full' },
-			{ path: 'home', component: HomeComponent },
+            { path: '', redirectTo: 'vehicles', pathMatch: 'full' },
 			{ path: 'vehicles/edit/:id', component: VehicleFormComponent },
+			{ path: 'vehicles/new', component: VehicleFormComponent },	
 			{ path: 'vehicles/:id', component: VehicleViewComponent },
-			{ path: 'vehicles/new', component: VehicleFormComponent },
 			{ path: 'vehicles', component: VehicleListComponent },
-            { path: '**', redirectTo: 'home' }
+            { path: '**', redirectTo: '' }
         ])
 	],
 	providers: [

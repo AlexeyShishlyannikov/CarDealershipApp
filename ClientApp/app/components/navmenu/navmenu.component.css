@@ -1,0 +1,7 @@
+nav {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	font-size: 10pt;
+	z-index: 1;
+}

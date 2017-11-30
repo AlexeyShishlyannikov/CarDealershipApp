@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { Vehicle, SaveVehicle } from '../models/vehicle';
 import { Model } from '../models/model';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Injectable()
 export class VehicleService {
@@ -23,6 +24,21 @@ export class VehicleService {
 			.map(res => res.json());
 	}
 
+	public countMakes(vehicles : any[], makes: any[]){
+		vehicles.forEach(vehicle => {
+			var totalNumber = makes[vehicle.make.id - 1].totalNumber;
+			if(totalNumber){
+				makes[vehicle.make.id - 1].totalNumber++;
+			}
+			else
+				makes[vehicle.make.id - 1].totalNumber = 1;
+		});
+	}
+
+	public countModels(){
+
+	}
+
 	// Single Vehicle Methods
 	public getVehicle(id: number){
 		return this.http.get(`/api/vehicles/${id}`)
@@ -38,5 +54,10 @@ export class VehicleService {
 	}
 	public deleteVehicle(id: number){
 		return this.http.delete(`/api/vehicle/${id}`);
+	}
+	public formatVehicleDate(vehicles: any[]){
+		vehicles.forEach(vehicle => {
+			vehicle.lastUpdateParsed = Date.parse(vehicle.lastUpdate);
+		});
 	}
 }
