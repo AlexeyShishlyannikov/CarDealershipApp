@@ -1,15 +1,17 @@
+
 .background{
 	background-color: rgb(255, 255, 255);
 }
 .vehicleList{
 	background-color: rgb(255, 254, 254) ;
 }
+
 li {
 	margin: 0;
 	padding: 0;
 }
 .vehicle-item{
-	margin-bottom: 5%;
+	padding: 5% 0%;
 	border-bottom-color: rgba(77, 62, 62, 0.363);
 	border-bottom-width: 0.5px;
 	border-bottom-style: solid;
@@ -17,6 +19,5 @@ li {
 ul{
 	list-style: none;
 }
-li{
-	
+.filter-panel{
 }

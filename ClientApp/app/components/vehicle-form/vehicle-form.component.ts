@@ -1,9 +1,10 @@
 import { VehicleService } from './../../services/vehicle.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { SaveVehicle, Vehicle } from '../../models/vehicle';
 import { ActivatedRoute, Router } from '@angular/router/';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/Observable/forkJoin';
+import { PhotoService } from '../../services/photo.service';
 
 
 @Component({
@@ -12,6 +13,7 @@ import 'rxjs/add/Observable/forkJoin';
 	styleUrls: ['./vehicle-form.component.css']
 })
 export class VehicleFormComponent implements OnInit {
+	@ViewChild('fileInput') fileInput: ElementRef;
 	vehicle: SaveVehicle = {
 		id: 0,
 		makeId: 0,
@@ -27,10 +29,12 @@ export class VehicleFormComponent implements OnInit {
 	};
 	makes : any[];
 	models : any[];
+	photos: any[];
 	constructor(
 		private vehicleService: VehicleService,
 		private route: ActivatedRoute,
-		private router: Router
+		private router: Router,
+		private photoService: PhotoService
 	) {
 		route.params.subscribe(p => {
 			if (p['id'])
@@ -56,6 +60,8 @@ export class VehicleFormComponent implements OnInit {
 					this.router.navigate(['/home']);
 				}
 			});
+		this.photoService.getPhotos(this.vehicle.id)
+			.subscribe(photos => this.photos = photos);
 	}
 
 	private setVehicle(v: Vehicle){
@@ -80,6 +86,19 @@ export class VehicleFormComponent implements OnInit {
 		var selectedMake = this.makes.find(m => m.id == this.vehicle.makeId);
 		this.models = selectedMake ? selectedMake.models : [];
 	}
+	uploadPhoto() {
+		var nativeElement: any = this.fileInput.nativeElement;
+
+		this.photoService.uploadPhoto(this.vehicle.id, nativeElement.files[0])
+			.subscribe(photo => {
+				this.photos.push(photo);
+			});
+	}
+
+	deletePicture(vehicleId : number, pictureId : number){
+		this.photoService.deletePhoto(vehicleId, pictureId).subscribe();
+		this.photos.splice(this.photos.findIndex(p => p.id == pictureId),1);
+	}
 
 	submit(){
 		if (this.vehicle.id > 0) {
@@ -91,6 +110,6 @@ export class VehicleFormComponent implements OnInit {
 					console.log(this.vehicle, "CREATED");
 				});
 		}
-		
+		this.router.navigate(['/vehicles/']);
 	}
 }

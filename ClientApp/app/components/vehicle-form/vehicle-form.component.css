@@ -1,0 +1,11 @@
+
+
+#pic-div{
+	position: relative;
+	width: 50%;
+}
+#pic-div button{
+	position: absolute;
+	bottom: 5px;
+	right: 5px; 
+}
