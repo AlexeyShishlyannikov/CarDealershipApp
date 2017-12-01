@@ -1,8 +1,8 @@
 .title h1,
 .title a{
-	display: inline;	
+	display: inline-block;	
 }
 .title a{
-	font-size: 200%;
+	font-size: 150%;
 	color: black;
 }

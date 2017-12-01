@@ -4,12 +4,14 @@ import 'rxjs/add/operator/map';
 import { Vehicle, SaveVehicle } from '../models/vehicle';
 import { Model } from '../models/model';
 import { forEach } from '@angular/router/src/utils/collection';
+import { PhotoService } from './photo.service';
 
 @Injectable()
 export class VehicleService {
 
 	constructor(
-		private http: Http
+		private http: Http,
+		private photoService: PhotoService
 	) { }
 
 	// Makes Method
@@ -35,10 +37,6 @@ export class VehicleService {
 		});
 	}
 
-	public countModels(){
-
-	}
-
 	// Single Vehicle Methods
 	public getVehicle(id: number){
 		return this.http.get(`/api/vehicles/${id}`)
@@ -53,7 +51,13 @@ export class VehicleService {
 			.map(res => res.json());
 	}
 	public deleteVehicle(id: number){
-		return this.http.delete(`/api/vehicle/${id}`);
+		this.photoService.getPhotos(id).subscribe(photos => {
+			photos.forEach((photo : any) => {
+				this.photoService.deletePhoto(id, photo.id)
+					.subscribe();
+			});
+		});
+		return this.http.delete(`/api/vehicles/${id}`);
 	}
 	public formatVehicleDate(vehicles: any[]){
 		vehicles.forEach(vehicle => {

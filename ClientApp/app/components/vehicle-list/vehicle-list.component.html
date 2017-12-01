@@ -43,21 +43,24 @@
 			</div>
 		</div>
 		<div class="col-sm-9">
-			<ul class="vehicleList container-fluid">
+			<ul class="vehicleList ">
 				<li class="row vehicle-item" *ngFor="let v of vehicles">
 					<div class=" ">
-						<div class="col-sm-6">
-							<div *ngIf="v.photos" class="">
+						<div class="col-md-5">
+							<div *ngIf="v.photos && v.photos[0];else noPicture" class="">
 								<img src="/uploads/{{v.photos[0].fileName}}" class="img-thumbnail" alt="No picture">
 							</div>
+							<ng-template #noPicture>
+								<p class="text-center">Picture wasn't provided.</p>	
+							</ng-template>
 						</div>
-						<div class="col-sm-4">
+						<div class="col-md-4 col-xs-6">
 							<h3 class="title">{{ v.yearMade }} {{ v.make.name }} {{ v.model.name }}</h3>
 							<p>Mileage: {{ v.mileage }}</p>
 							<p>Color: {{ v.color }}</p>
 							<p>VIN: {{ v.vinNumber }}</p>
 						</div>
-						<div class="col-sm-2">
+						<div class="col-md-1 col-xs-6">
 							<h3>${{v.price | number }}</h3>
 							<a class="btn btn-primary" [routerLink]="['/vehicles/', v.id]">View Details</a>
 						</div>
@@ -66,6 +69,4 @@
 			</ul>
 		</div>
 	</div>
-	
-	
 </div>

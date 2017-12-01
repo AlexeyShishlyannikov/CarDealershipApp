@@ -5,94 +5,99 @@
 	<p>
 		{{ vehicle | json }}
 	</p>
-	<ul role="tablist" class="nav nav-tabs">
-		<li class="active" role="presentation">
-			<a href="#basic" aria-controls="basic" role="tab" data-toggle="tab">Details</a>
-		</li>
-		<li role="presentation">
-			<a href="#photos" aria-controls="photos" role="tab" data-toggle="tab">Photos</a>
-		</li>
-	</ul>
-	<div class="tab-content" *ngIf="vehicle">
-		<div role="tab-panel" class="tab-pane active" id="basic">
-			<form #f="ngForm" (ngSubmit)="submit()" novalidate>
-				<br>
-				<div class="form-group">
-					<label for="make">Make</label>
-					<select id="make" class="form-control" (change)="onMakeChange()" [(ngModel)]="vehicle.makeId" name="makeId" required #make="ngModel">
-						<option value=""></option>
-						<option *ngFor="let m of makes" value="{{ m.id }}">{{ m.name }}</option>
-					</select>
-					<div class="alert alert-danger" *ngIf="make.touched && !make.valid">Please specify the make.</div>
-				</div>
-				<div class="form-group">
-					<label for="model">Model</label>
-					<select id="model" class="form-control" [(ngModel)]="vehicle.modelId" name="modelId" required #model="ngModel">
-						<option value=""></option>
-						<option *ngFor="let m of models" value="{{ m.id }}">{{ m.name }}</option>
-					</select>
-					<div class="alert alert-danger" *ngIf="model.touched && !model.valid">Please specify the model.</div>
-				</div>
-				<div class="form-group">
-					<label for="yearMade">Year Made</label>
-					<input type="number" id="yearMade" [(ngModel)]="vehicle.yearMade" class="form-control" name="yearMade" required #yearMade="ngModel">
-					<div class="alert alert-danger" *ngIf="yearMade.touched && !yearMade.valid">Please specify the year.</div>
-				</div>
-				<div class="form-group">
-					<label for="transmissionType">Transmission</label>
-					<select type="text" id="transmissionType" [(ngModel)]="vehicle.transmissionType" class="form-control" name="transmissionType"
-						required #transmissionType="ngModel">
-						<option value="Automatic">Automatic</option>
-						<option value="Manual">Manual</option>
-					</select>
-					<div class="alert alert-danger" *ngIf="transmissionType.touched && !transmissionType.valid">Please specify the year.</div>
-				</div>
-				<div class="form-group">
-					<label for="color">Color</label>
-					<input type="text" id="color" [(ngModel)]="vehicle.color" class="form-control" name="color" #color="ngModel">
-				</div>
-				<div class="form-group">
-					<label for="vinNumber">VIN Number</label>
-					<input type="text" id="vinNumber" [(ngModel)]="vehicle.vinNumber" class="form-control" name="vinNumber" required #vinNumber="ngModel">
-					<div class="alert alert-danger" *ngIf="vinNumber.touched && !vinNumber.valid">Please specify VIN Number.</div>
-				</div>
-				<div class="form-group">
-					<label for="mpg">MPG</label>
-					<input type="number" id="mpg" [(ngModel)]="vehicle.mpg" class="form-control" name="mpg" required #mpg="ngModel">
-					<div class="alert alert-danger" *ngIf="mpg.touched && !mpg.valid">Please provide MPG.</div>
-				</div>
-				<div class="form-group">
-					<label for="mileage">Mileage</label>
-					<input type="number" id="mileage" [(ngModel)]="vehicle.mileage" class="form-control" name="mileage" required #mileage="ngModel">
-					<div class="alert alert-danger" *ngIf="mileage.touched && !mileage.valid">Please provide mileage.</div>
-				</div>
-				<div class="form-group">
-					<label for="features">Additional features</label>
-					<input type="text" id="features" [(ngModel)]="vehicle.features" class="form-control" name="features" #features="ngModel">
-				</div>
-				<div class="form-group">
-					<label for="price">Price</label>
-					<input type="number" id="price" [(ngModel)]="vehicle.price" class="form-control" name="price" #price="ngModel" required>
-					<div class="alert alert-danger" *ngIf="mileage.touched && !mileage.valid">Please provide the price.</div>
-				</div>
-			
-				<button class="btn btn-primary" [disabled]="!f.valid">Submit</button>
-			</form>
-		</div>
-		<div class="tab-pane" role="tab-panel" id="photos">
-			<h2>Photos</h2>
-			<input type="file" name="" id="" (change)="uploadPhoto()" #fileInput>
-			<!-- <div class="progress" *ngIf="progress && progress.percentage < 100">
-				<div class="progress-bar" [style.width]="progress.percentage + '%'">
-					<span class="sr-only">{{progress.percentage}}% Complete</span>
-				</div>
-			</div> -->
-			<div id="pic-div" *ngFor="let photo of photos">
-				<img src="/uploads/{{ photo.fileName }}" class="image img-thumbnail" alt="Not loaded">
-				<button class="btn btn-danger" (click)="deletePicture(vehicle.id, photo.id)">Delete picture</button>
+	<form #f="ngForm" (ngSubmit)="submit()" novalidate>
+		<ul role="tablist" class="nav nav-tabs">
+			<li class="active" role="presentation">
+				<a href="#basic" aria-controls="basic" role="tab" data-toggle="tab">Details</a>
+			</li>
+			<li role="presentation">
+				<a href="#photos" aria-controls="photos" role="tab" data-toggle="tab">Photos</a>
+			</li>
+		</ul>
+		<div class="tab-content" *ngIf="vehicle">
+			<div role="tab-panel" class="tab-pane active" id="basic">
+				
+					<br>
+					<div class="form-group">
+						<label for="make">Make</label>
+						<select id="make" class="form-control" (change)="onMakeChange()" [(ngModel)]="vehicle.makeId" name="makeId" required #make="ngModel">
+							<option value=""></option>
+							<option *ngFor="let m of makes" value="{{ m.id }}">{{ m.name }}</option>
+						</select>
+						<div class="alert alert-danger" *ngIf="make.touched && !make.valid">Please specify the make.</div>
+					</div>
+					<div class="form-group">
+						<label for="model">Model</label>
+						<select id="model" class="form-control" [(ngModel)]="vehicle.modelId" name="modelId" required #model="ngModel">
+							<option value=""></option>
+							<option *ngFor="let m of models" value="{{ m.id }}">{{ m.name }}</option>
+						</select>
+						<div class="alert alert-danger" *ngIf="model.touched && !model.valid">Please specify the model.</div>
+					</div>
+					<div class="form-group">
+						<label for="yearMade">Year Made</label>
+						<input type="number" id="yearMade" [(ngModel)]="vehicle.yearMade" class="form-control" name="yearMade" required #yearMade="ngModel">
+						<div class="alert alert-danger" *ngIf="yearMade.touched && !yearMade.valid">Please specify the year.</div>
+					</div>
+					<div class="form-group">
+						<label for="transmissionType">Transmission</label>
+						<select type="text" id="transmissionType" [(ngModel)]="vehicle.transmissionType" class="form-control" name="transmissionType"
+							required #transmissionType="ngModel">
+							<option value="Automatic">Automatic</option>
+							<option value="Manual">Manual</option>
+						</select>
+						<div class="alert alert-danger" *ngIf="transmissionType.touched && !transmissionType.valid">Please specify the year.</div>
+					</div>
+					<div class="form-group">
+						<label for="color">Color</label>
+						<input type="text" id="color" [(ngModel)]="vehicle.color" class="form-control" name="color" #color="ngModel">
+					</div>
+					<div class="form-group">
+						<label for="vinNumber">VIN Number</label>
+						<input type="text" id="vinNumber" [(ngModel)]="vehicle.vinNumber" class="form-control" name="vinNumber" required #vinNumber="ngModel">
+						<div class="alert alert-danger" *ngIf="vinNumber.touched && !vinNumber.valid">Please specify VIN Number.</div>
+					</div>
+					<div class="form-group">
+						<label for="mpg">MPG</label>
+						<input type="number" id="mpg" [(ngModel)]="vehicle.mpg" class="form-control" name="mpg" required #mpg="ngModel">
+						<div class="alert alert-danger" *ngIf="mpg.touched && !mpg.valid">Please provide MPG.</div>
+					</div>
+					<div class="form-group">
+						<label for="mileage">Mileage</label>
+						<input type="number" id="mileage" [(ngModel)]="vehicle.mileage" class="form-control" name="mileage" required #mileage="ngModel">
+						<div class="alert alert-danger" *ngIf="mileage.touched && !mileage.valid">Please provide mileage.</div>
+					</div>
+					<div class="form-group">
+						<label for="features">Additional features</label>
+						<input type="text" id="features" [(ngModel)]="vehicle.features" class="form-control" name="features" #features="ngModel">
+					</div>
+					<div class="form-group">
+						<label for="price">Price</label>
+						<input type="number" id="price" [(ngModel)]="vehicle.price" class="form-control" name="price" #price="ngModel" required>
+						<div class="alert alert-danger" *ngIf="price.touched && !price.valid">Please provide the price.</div>
+					</div>
+				
+					
 			</div>
-		</div>
+			<div class="tab-pane" role="tab-panel" id="photos">
+				<h2>Photos</h2>
+				<input type="file" name="fileInput" id="fileInput" (change)="uploadPhoto()" #fileInput required>
+				<div class="alert alert-danger" *ngIf="fileInput.touched && !fileInput.valid">Please provide the picture.</div>
+				<!-- <div class="progress" *ngIf="progress && progress.percentage < 100">
+					<div class="progress-bar" [style.width]="progress.percentage + '%'">
+						<span class="sr-only">{{progress.percentage}}% Complete</span>
+					</div>
+				</div> -->
+				<div id="pic-div" *ngFor="let photo of photos">
+					<img src="/uploads/{{ photo.fileName }}" class="image img-thumbnail" alt="Not loaded">
+					<button class="btn btn-danger" (click)="deletePicture(vehicle.id, photo.id)">Delete picture</button>
+				</div>
+			</div>
 
-	</div>
+		</div>
+		<hr>
+		<button class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+		<a *ngIf="vehicle.id" class="btn btn-danger" type="button" (click)="delete()">Delete</a>
+	</form>
 
 </div>

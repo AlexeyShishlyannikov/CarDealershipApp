@@ -13,8 +13,14 @@ import { ContactService } from '../../services/contact.service';
 })
 export class VehicleViewComponent implements OnInit {
 	vehicle: any ={
-		makeId: 0,
-		modelId: 0,
+		make: {
+			id: 0,
+			name: ''
+		},
+		model: {
+			id: 0,
+			name: ''
+		},
 		yearMade: 0,
 		price: 0,
 		vinNumber: '',
@@ -34,7 +40,7 @@ export class VehicleViewComponent implements OnInit {
 		facebookUrl: '',
 		InstagramUrl: ''
 	};
-	photos: any[];
+	photos: any[] = [];
 	vehicleId: number;
 	constructor(
 		private vehicleService: VehicleService,

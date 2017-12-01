@@ -18,7 +18,7 @@ export class VehicleFormComponent implements OnInit {
 		id: 0,
 		makeId: 0,
 		modelId: 0,
-		yearMade: 0,
+		yearMade: 2010,
 		price: 0,
 		vinNumber: '',
 		transmissionType: '',
@@ -87,12 +87,25 @@ export class VehicleFormComponent implements OnInit {
 		this.models = selectedMake ? selectedMake.models : [];
 	}
 	uploadPhoto() {
-		var nativeElement: any = this.fileInput.nativeElement;
-
-		this.photoService.uploadPhoto(this.vehicle.id, nativeElement.files[0])
-			.subscribe(photo => {
-				this.photos.push(photo);
-			});
+		var nativeElement: any = this.fileInput.nativeElement;		
+		if(this.vehicle.id){
+			this.photoService.uploadPhoto(this.vehicle.id, nativeElement.files[0])
+				.subscribe(photo => {
+					this.photos.push(photo);
+				});
+		} else {
+			this.vehicleService.addVehicle(this.vehicle)
+				.subscribe(vehicle => {
+					this.vehicle.id = vehicle.id;
+					this.photoService.uploadPhoto(this.vehicle.id, nativeElement.files[0])
+						.subscribe(photo => {
+							this.photos.push(photo);
+						});
+				});
+			
+			this.router.navigate([`/`]);
+		}
+		
 	}
 
 	deletePicture(vehicleId : number, pictureId : number){
@@ -111,5 +124,9 @@ export class VehicleFormComponent implements OnInit {
 				});
 		}
 		this.router.navigate(['/vehicles/']);
+	}
+	delete(){
+		this.vehicleService.deleteVehicle(this.vehicle.id)
+			.subscribe(x => this.router.navigate(['/vehicles']));
 	}
 }

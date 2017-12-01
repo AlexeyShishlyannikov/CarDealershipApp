@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using AutoCity.Core.Models;
 using AutoCity.Persistance;
 using AutoMapper;
+using CarDealershipApp.Core.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -32,6 +34,39 @@ namespace AutoCity
 
 			services.AddDbContext<AutoCityDbContext>(options =>
 				options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+			
+			services.AddIdentity<ApplicationUser, IdentityRole>()
+				.AddEntityFrameworkStores<AutoCityDbContext>()
+				.AddDefaultTokenProviders();
+
+			services.Configure<IdentityOptions>(options =>
+			{
+				// Password settings
+				options.Password.RequireDigit = true;
+				options.Password.RequiredLength = 8;
+				options.Password.RequireNonAlphanumeric = false;
+				options.Password.RequireUppercase = false;
+				options.Password.RequireLowercase = false;
+
+				// Lockout settings
+				options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+				options.Lockout.MaxFailedAccessAttempts = 10;
+				options.Lockout.AllowedForNewUsers = true;
+
+				// User settings
+				options.User.RequireUniqueEmail = true;
+			});
+
+			services.ConfigureApplicationCookie(options =>
+			{
+				// Cookie settings
+				options.Cookie.HttpOnly = true;
+				options.Cookie.Expiration = TimeSpan.FromDays(150);
+				options.LoginPath = "/Account/Login"; // If the LoginPath is not set here, ASP.NET Core will default to /Account/Login
+				options.LogoutPath = "/Account/Logout"; // If the LogoutPath is not set here, ASP.NET Core will default to /Account/Logout
+				options.AccessDeniedPath = "/Account/AccessDenied"; // If the AccessDeniedPath is not set here, ASP.NET Core will default to /Account/AccessDenied
+				options.SlidingExpiration = true;
+			});
 
             services.AddMvc();
         }
@@ -53,6 +88,8 @@ namespace AutoCity
             }
 
             app.UseStaticFiles();
+			
+			app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
