@@ -7,6 +7,7 @@
 	- SQL Database
 	- Identity Framework
 	- Bootstrap
+	- TypeScript
 # API Endpoints
 	[Get List of Cars](http://localhost:5000/api/vehicles/)
 	[Get Car Object](http://localhost:5000/api/vehicles/vehicleId)

@@ -15,6 +15,7 @@ import { VehicleFormComponent } from './components/vehicle-form/vehicle-form.com
 import { VehicleViewComponent } from './components/vehicle-view/vehicle-view.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { PhotoService } from './services/photo.service';
+import { MakeFormComponent } from './components/make-form/make-form.component';
 
 @NgModule({
     declarations: [
@@ -24,7 +25,8 @@ import { PhotoService } from './services/photo.service';
         VehicleListComponent,
         VehicleFormComponent,
         VehicleViewComponent,
-        FooterComponent
+        FooterComponent,
+        MakeFormComponent
     ],
     imports: [
         CommonModule,
@@ -36,6 +38,7 @@ import { PhotoService } from './services/photo.service';
 			{ path: 'vehicles/new', component: VehicleFormComponent },	
 			{ path: 'vehicles/:id', component: VehicleViewComponent },
 			{ path: 'vehicles', component: VehicleListComponent },
+			{ path: 'makes', component: MakeFormComponent },
             { path: '**', redirectTo: '' }
         ])
 	],

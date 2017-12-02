@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container background">
 	<h1>
 		<span *ngIf="!vehicle.id;else other">New</span>
 		<ng-template #other>Edit</ng-template> Vehicle</h1>
@@ -99,5 +99,5 @@
 		<button class="btn btn-primary" [disabled]="!f.valid">Submit</button>
 		<a *ngIf="vehicle.id" class="btn btn-danger" type="button" (click)="delete()">Delete</a>
 	</form>
-
+	<br>
 </div>
