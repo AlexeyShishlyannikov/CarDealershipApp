@@ -12,6 +12,7 @@ namespace AutoCity.Persistance
 		public DbSet<Vehicle> Vehicles { get; set; }
 		public DbSet<Contacts> Contacts { get; set; }
 		public DbSet<Photo> Photos { get; set; }
+		public DbSet<CarBuyer> CarBuyers { get; set; }
 		public AutoCityDbContext(DbContextOptions<AutoCityDbContext> options) : base(options)
 		{
 

@@ -11,9 +11,10 @@ using System;
 namespace AutoCity.Migrations
 {
     [DbContext(typeof(AutoCityDbContext))]
-    partial class AutoCityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171202013358_AddingUserRole")]
+    partial class AddingUserRole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

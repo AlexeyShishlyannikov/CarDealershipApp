@@ -1,6 +1,8 @@
 using AutoCity.Controllers.Resources;
 using AutoCity.Core.Models;
 using AutoMapper;
+using CarDealershipApp.Controllers.Resources;
+using CarDealershipApp.Core.Models;
 
 namespace AutoCity.Mapping
 {
@@ -24,6 +26,8 @@ namespace AutoCity.Mapping
 			CreateMap<PhotoResource, Photo>();
 			CreateMap<ModelResource, Model>()
 				.ForMember(v => v.Id, opt => opt.Ignore());
+			CreateMap<RegistrationResource,ApplicationUser>()
+				.ForMember(au => au.UserName, map => map.MapFrom(vm => vm.Email)); ;
 		}
 
     }

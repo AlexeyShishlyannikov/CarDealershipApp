@@ -1,7 +1,6 @@
 import { Vehicle, KeyValuePair } from './../../models/vehicle';
 import { Component, OnInit } from '@angular/core';
 import { VehicleService } from '../../services/vehicle.service';
-import { MzButtonModule, MzInputModule } from 'ng2-materialize';
 import { PhotoService } from '../../services/photo.service';
 
 
