@@ -3,6 +3,7 @@ using AutoCity.Controllers.Resources;
 using AutoCity.Core.Models;
 using AutoCity.Persistance;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AutoCity.Controllers
@@ -17,6 +18,7 @@ namespace AutoCity.Controllers
 			this.context = context;
 			this.mapper = mapper;
 		}
+		
 		[HttpPost]
 		public async Task<IActionResult> AddModel([FromBody] ModelResource modelResource)
 		{
@@ -30,6 +32,7 @@ namespace AutoCity.Controllers
 
 			return Ok(modelResource);
 		}
+		
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> DeleteModel(int id)
 		{

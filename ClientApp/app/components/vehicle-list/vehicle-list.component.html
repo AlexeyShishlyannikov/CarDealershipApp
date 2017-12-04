@@ -40,6 +40,7 @@
 						</select>
 					</div>
 				</div>
+				<a [routerLink]="['/vehicles/new']" style="width: 100%" class="btn btn-primary">Add Vehicle</a>
 			</div>
 		</div>
 		<div class="col-sm-9">
@@ -51,7 +52,7 @@
 								<img src="/uploads/{{v.photos[0].fileName}}" class="img-thumbnail" alt="No picture">
 							</div>
 							<ng-template #noPicture>
-								<p class="text-center">Picture wasn't provided.</p>	
+								<img src="../../../assets/qt-car-thumb.jpg" class="img-thumbnail" alt="No picture">
 							</ng-template>
 						</div>
 						<div class="col-md-4 col-xs-6">
@@ -63,6 +64,8 @@
 						<div class="col-md-1 col-xs-6">
 							<h3>${{v.price | number }}</h3>
 							<a class="btn btn-primary" [routerLink]="['/vehicles/', v.id]">View Details</a>
+							<br>
+							<a *ngIf="status" class="btn btn-primary" [routerLink]="['/vehicles/edit/', v.id]">Edit</a>
 						</div>
 					</div>
 				</li>

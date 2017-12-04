@@ -7,6 +7,7 @@
 		- Identity Framework
 		- FluentValidation
 		- AutoMapper
+		- Jwt
 	- Angular 4
 		- Bootstrap
 		- TypeScript
@@ -17,4 +18,6 @@
 	[Get Contacts](http://localhost:5000/api/contacts/)
 	[Get Makes](http://localhost:5000/api/makes/)
 	[Get Photos](http://localhost:5000/api/vehicles/vehicleId/photos/photoId)
+	[Auth](http://localhost:5000/api/auth/login)
+	[Register](http://localhost:5000/api/accounts/)
 	

@@ -16,6 +16,12 @@ import { VehicleViewComponent } from './components/vehicle-view/vehicle-view.com
 import { FooterComponent } from './components/footer/footer.component';
 import { PhotoService } from './services/photo.service';
 import { MakeFormComponent } from './components/make-form/make-form.component';
+import { UserService } from './services/user.service';
+import { BaseService } from './services/base.service';
+import { RegistrationFormComponent } from './account/components/registration-form/registration-form.component';
+import { LoginFormComponent } from './account/components/login-form/login-form.component';
+import { AuthGuard } from './auth.guard';
+import { LocalStorage } from './helper/local-storage';
 
 @NgModule({
     declarations: [
@@ -26,7 +32,9 @@ import { MakeFormComponent } from './components/make-form/make-form.component';
         VehicleFormComponent,
         VehicleViewComponent,
         FooterComponent,
-        MakeFormComponent
+		MakeFormComponent,
+		RegistrationFormComponent,
+		LoginFormComponent
     ],
     imports: [
         CommonModule,
@@ -34,19 +42,24 @@ import { MakeFormComponent } from './components/make-form/make-form.component';
 		FormsModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'vehicles', pathMatch: 'full' },
-			{ path: 'vehicles/edit/:id', component: VehicleFormComponent },
-			{ path: 'vehicles/new', component: VehicleFormComponent },	
+			{ path: 'vehicles/edit/:id', component: VehicleFormComponent, canActivate: [AuthGuard] },
+			{ path: 'vehicles/new', component: VehicleFormComponent, canActivate: [AuthGuard] },	
 			{ path: 'vehicles/:id', component: VehicleViewComponent },
 			{ path: 'vehicles', component: VehicleListComponent },
-			{ path: 'makes', component: MakeFormComponent },
-            { path: '**', redirectTo: '' }
+			{ path: 'register', component: RegistrationFormComponent,  },
+			{ path: 'login', component: LoginFormComponent,  },
+			{ path: 'makes', component: MakeFormComponent, canActivate: [AuthGuard] },
+            { path: '**', redirectTo: '' },
         ])
 	],
 	providers: [
 		VehicleService,
 		ModelService,
 		ContactService,
-		PhotoService
+		PhotoService,
+		UserService,
+		{ provide: LocalStorage, useValue: { getItem() { } } },
+		AuthGuard
 	]
 })
 export class AppModuleShared {

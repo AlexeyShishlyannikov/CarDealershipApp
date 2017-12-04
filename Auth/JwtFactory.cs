@@ -23,10 +23,7 @@ namespace CarDealershipApp.Auth
 			var claims = new[]
 		 {
 				 new Claim(JwtRegisteredClaimNames.Sub, userName),
-				 new Claim(JwtRegisteredClaimNames.Jti, await _jwtOptions.JtiGenerator()),
-				 new Claim(JwtRegisteredClaimNames.Iat, ToUnixEpochDate(_jwtOptions.IssuedAt).ToString(), ClaimValueTypes.Integer64),
-				 identity.FindFirst(Helpers.Constants.Strings.JwtClaimIdentifiers.Rol),
-				 identity.FindFirst(Helpers.Constants.Strings.JwtClaimIdentifiers.Id)
+				 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
 			 };
 
 			// Create the JWT security token and encode it.
@@ -40,7 +37,7 @@ namespace CarDealershipApp.Auth
 
 			var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-			return encodedJwt;
+			return  encodedJwt;
 		}
 
 		public ClaimsIdentity GenerateClaimsIdentity(string userName, string id)

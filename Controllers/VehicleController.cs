@@ -6,6 +6,7 @@ using AutoCity.Controllers.Resources;
 using AutoCity.Core.Models;
 using AutoCity.Persistance;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +22,7 @@ namespace AutoCity.Controllers
 			this.mapper = mapper;
 			this.context = context;
 		}
+		
 
 		[HttpPost]
 		public async Task<IActionResult> CreateVehicle([FromBody] VehicleResource vehicleResource)
@@ -67,6 +69,7 @@ namespace AutoCity.Controllers
 
 			return Ok(mapper.Map<IEnumerable<Vehicle>,IEnumerable<VehicleResource>>(vehicles));
 		}
+		
 
 		[HttpPut("{id}")]
 		public async Task<IActionResult> UpdateVehicle(int id,[FromBody] VehicleResource vehicleResource)
@@ -89,6 +92,7 @@ namespace AutoCity.Controllers
 
 			return Ok(result);
 		}
+		
 
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> DeleteVehicle(int id)

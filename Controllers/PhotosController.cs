@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AutoCity.Controllers
 {
@@ -38,7 +39,7 @@ namespace AutoCity.Controllers
 
 			return mapper.Map<IEnumerable<Photo>, IEnumerable<PhotoResource>>(photos);
 		}
-
+	
 		[HttpPost]
 		public async Task<IActionResult> UploadPhoto(int vehicleId, IFormFile file)
 		{
@@ -68,6 +69,7 @@ namespace AutoCity.Controllers
 
 			return Ok(mapper.Map<Photo, PhotoResource>(photo));
 		}
+	
 		[HttpDelete("{photoId}")]
 		public async Task<IActionResult> DeletePhoto(int vehicleId, int photoId)
 		{

@@ -3,6 +3,7 @@ using AutoCity.Controllers.Resources;
 using AutoCity.Core.Models;
 using AutoCity.Persistance;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,7 +19,7 @@ namespace AutoCity.Controllers
 			this.mapper = mapper;
 			this.context = context;
 		}
-
+		
 		[HttpPut("{id}")]
 		public async Task<IActionResult> UpdateContacts(int id, [FromBody] ContactsResource contactsResource)
 		{

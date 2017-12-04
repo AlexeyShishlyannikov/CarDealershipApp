@@ -116,14 +116,19 @@ export class VehicleFormComponent implements OnInit {
 	submit(){
 		if (this.vehicle.id > 0) {
 			this.vehicleService.updateVehicle(this.vehicle.id, this.vehicle)
-				.subscribe(x => console.log(this.vehicle, "UPDATED"));
+				.subscribe(x =>{
+					console.log(this.vehicle, "UPDATED");
+					this.router.navigate(['/vehicles']);
+				}
+					);
 		} else {
 			this.vehicleService.addVehicle(this.vehicle)
 				.subscribe(x => {
 					console.log(this.vehicle, "CREATED");
+					this.router.navigate(['/vehicles']);
 				});
 		}
-		this.router.navigate(['/vehicles/']);
+		
 	}
 	delete(){
 		this.vehicleService.deleteVehicle(this.vehicle.id)

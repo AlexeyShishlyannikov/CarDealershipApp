@@ -2,6 +2,7 @@ import { Vehicle, KeyValuePair } from './../../models/vehicle';
 import { Component, OnInit } from '@angular/core';
 import { VehicleService } from '../../services/vehicle.service';
 import { PhotoService } from '../../services/photo.service';
+import { UserService } from '../../services/user.service';
 
 
 @Component({
@@ -18,11 +19,14 @@ export class VehicleListComponent implements OnInit {
 	models: any[];
 	selectedModel: any;
 	photos: any[];
-	
+	status: boolean;
+
 	constructor(
 		private vehicleService: VehicleService,
-		private photoService: PhotoService
-	) { }
+		private photoService: PhotoService,
+		private userService : UserService
+	) {
+	 }
 
 	ngOnInit() {
 		this.populateVehicles();
@@ -31,7 +35,9 @@ export class VehicleListComponent implements OnInit {
 				this.makes = makes;
 				this.vehicleService.countMakes(this.vehicles, this.makes);
 			});
+		this.userService.authNavStatus$.subscribe(status => this.status = status);
 	}
+	
 
 	private populateVehicles() {
 		this.vehicleService.getVehicles()

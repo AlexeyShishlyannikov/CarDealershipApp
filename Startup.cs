@@ -9,6 +9,7 @@ using AutoMapper;
 using CarDealershipApp.Auth;
 using CarDealershipApp.Core.Models;
 using CarDealershipApp.Helpers;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -44,35 +45,39 @@ namespace AutoCity
 
 			services.AddSingleton<IJwtFactory, JwtFactory>();
 
-			services.AddAuthorization(options =>
-				{
-					options.AddPolicy("ApiUser", policy => policy.RequireClaim(Constants.Strings.JwtClaimIdentifiers.Rol, Constants.Strings.JwtClaims.ApiAccess));
-				});
+			
 
-			services.AddIdentity<ApplicationUser, IdentityRole>()
+			services.AddIdentity<ApplicationUser, IdentityRole>
+				(o =>
+				{
+					// configure identity options
+					o.Password.RequireDigit = false;
+					o.Password.RequireLowercase = false;
+					o.Password.RequireUppercase = false;
+					o.Password.RequireNonAlphanumeric = false;
+					o.Password.RequiredLength = 6;
+				})
 				.AddEntityFrameworkStores<AutoCityDbContext>()
 				.AddDefaultTokenProviders();
-
-			services.Configure<IdentityOptions>(options =>
-			{
-				// Password settings
-				options.Password.RequireDigit = true;
-				options.Password.RequiredLength = 8;
-				options.Password.RequireNonAlphanumeric = false;
-				options.Password.RequireUppercase = false;
-				options.Password.RequireLowercase = false;
-
-				// Lockout settings
-				options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
-				options.Lockout.MaxFailedAccessAttempts = 10;
-				options.Lockout.AllowedForNewUsers = true;
-
-				// User settings
-				options.User.RequireUniqueEmail = true;
-			});
+			
 			// jwt wire up
 			// Get options from app settings
+			// var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
 			var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
+			
+
+			services.AddAuthentication( options => {}).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>{
+				// options.AddPolicy("ApiUser", policy => policy.RequireClaim(Constants.Strings.JwtClaimIdentifiers.Rol, Constants.Strings.JwtClaims.ApiAccess));
+				options.RequireHttpsMetadata = false;
+				options.SaveToken = true;
+
+				options.TokenValidationParameters = new TokenValidationParameters()
+				{
+					ValidIssuer = Configuration["Tokens:Issuer"],
+					ValidAudience = Configuration["Tokens:Issuer"],
+					IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"]))
+				};
+			});
 
 			// Configure JwtIssuerOptions
 			services.Configure<JwtIssuerOptions>(options =>
@@ -81,19 +86,9 @@ namespace AutoCity
 				options.Audience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)];
 				options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
 			});
+			
 
-			services.ConfigureApplicationCookie(options =>
-			{
-				// Cookie settings
-				options.Cookie.HttpOnly = true;
-				options.Cookie.Expiration = TimeSpan.FromDays(150);
-				options.LoginPath = "/Account/Login"; // If the LoginPath is not set here, ASP.NET Core will default to /Account/Login
-				options.LogoutPath = "/Account/Logout"; // If the LogoutPath is not set here, ASP.NET Core will default to /Account/Logout
-				options.AccessDeniedPath = "/Account/AccessDenied"; // If the AccessDeniedPath is not set here, ASP.NET Core will default to /Account/AccessDenied
-				options.SlidingExpiration = true;
-			});
-
-            services.AddMvc();
+            services.AddMvc().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -111,38 +106,15 @@ namespace AutoCity
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+			// app.UseAuthentication();
+			
 
             app.UseStaticFiles();
 			
 			app.UseAuthentication();
-			var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
-			var tokenValidationParameters = new TokenValidationParameters
-			{
-				ValidateIssuer = true,
-				ValidIssuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)],
+			
 
-				ValidateAudience = true,
-				ValidAudience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)],
-
-				ValidateIssuerSigningKey = true,
-				IssuerSigningKey = _signingKey,
-
-				RequireExpirationTime = false,
-				ValidateLifetime = false,
-				ClockSkew = TimeSpan.Zero
-			};
-
-
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-
-                routes.MapSpaFallbackRoute(
-                    name: "spa-fallback",
-                    defaults: new { controller = "Home", action = "Index" });
-            });
+            app.UseMvc();
         }
     }
 }
