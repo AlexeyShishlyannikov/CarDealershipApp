@@ -1,4 +1,92 @@
-<div class="container">
+<div class=" m-t-sm-20">
+	<div class="container search">
+		<div class="search-option p-lg-30 p-b-lg-15 p-b-sm-30 p-r-sm-45 p-xs-15">
+			<div class="row">
+				<div class="col-sm-12 col-md-12 col-lg-12">
+					<div class="row">
+						<div class="col-sm-4 col-md-4 col-lg-4 m-b-lg-15 p-r-lg-0 p-r-xs-15">
+							<div class="select-wrapper">
+								<div class="dropdown">
+									<button class="dropdown-toggle form-item" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="make" (change)="onMakeChange()" [(ngModel)]="selectedMake" name="selectedMake" #make="ngModel">Make</button>
+									<ul class="dropdown-menu scrollable-menu">
+										<li></li>
+										<li *ngFor="let m of makes">{{m.name}}</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4 col-md-4 col-lg-4 m-b-lg-15 p-r-lg-0 p-r-xs-15">
+							<div class="select-wrapper">
+								<div class="dropdown">
+									<button class="dropdown-toggle form-item" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="model" (change)="filterCars()" [(ngModel)]="selectedModel" name="selectedModel" #model="ngModel">Model</button>
+									<ul class="dropdown-menu scrollable-menu">
+										<li></li>
+										<li *ngFor="let m of models"></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4 col-md-4 col-lg-4 col-lg-4 m-b-lg-15 p-r-lg-0 p-r-xs-15">
+							<div class="select-wrapper">
+								<div class="dropdown">
+									<button class="dropdown-toggle form-item" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by</button>
+									<ul class="dropdown-menu">
+										<li></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="wrap-body">
+		<div class="container">
+			<div class="wrap-body-inner p-t-lg-30">
+				<div class="p-t-lg-30">
+					<div class="heading">
+						<h3>
+							INVENTORY
+						</h3>
+						<span></span>
+					</div>
+					<div class="row">
+						<div *ngFor="let v of vehicles" class="col-sm-6 col-md-4 col-lg-4 ">
+							<div class="col-md-12 col-lg-12 col-sm-12 product">
+								<a [routerLink]="['/vehicles/', v.id]">
+									<div class="picture" *ngIf="v.photos && v.photos[0];else noPicture">
+										<img class="img-responsive" src="/uploads/{{v.photos[0].fileName}}" alt="No picture">
+									</div>
+									<ng-template #noPicture>
+										<div class="picture">
+											<img class="img-responsive" src="../../../assets/qt-car-thumb.jpg" alt="No picture">
+										</div>
+									</ng-template>
+								</a>
+								<div class="product-caption">
+									<h4 class="product-name">
+										<a [routerLink]="['/vehicles/', v.id]">
+											{{ v.yearMade }} {{ v.make.name }} {{ v.model.name }}
+										</a>
+										<span class="pull-right product-price">${{v.price | number}}</span>
+									</h4>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<br>
+	</div>
+</div>
+
+
+
+<!-- <div class="container">
 	<div class="row margin-drop">
 		<div class="col-sm-3">
 			<div class="filter-panel">
@@ -49,10 +137,10 @@
 					<div class=" ">
 						<div class="col-md-5">
 							<div *ngIf="v.photos && v.photos[0];else noPicture" class="">
-								<img src="/uploads/{{v.photos[0].fileName}}" class="img-thumbnail" alt="No picture">
+								<img src="/uploads/{{v.photos[0].fileName}}" class="img-responsive" alt="No picture">
 							</div>
 							<ng-template #noPicture>
-								<img src="../../../assets/qt-car-thumb.jpg" class="img-thumbnail" alt="No picture">
+								<img src="../../../assets/qt-car-thumb.jpg" class="img-responsive" alt="No picture">
 							</ng-template>
 						</div>
 						<div class="col-md-4 col-xs-6">
@@ -72,4 +160,4 @@
 			</ul>
 		</div>
 	</div>
-</div>
+</div> -->

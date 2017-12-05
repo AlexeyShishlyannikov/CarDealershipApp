@@ -1,5 +1,6 @@
 body{
-	background-image: url('../../../assets/pexels-photo-97079.jpeg');
+	background-image: url('../../../assets/background.jpg');
+	background-color: rgb(24, 23, 23);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-attachment: fixed;

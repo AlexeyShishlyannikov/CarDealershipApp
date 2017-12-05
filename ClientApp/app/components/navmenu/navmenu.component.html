@@ -1,41 +1,79 @@
-<nav class="navbar navbar-default">
+<div class="menu-bg">
 	<div class="container">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-			    aria-expanded="false">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" [routerLink]="['/vehicles']">Brand</a>
-		</div>
+		<div class="row">
+			<div class="col-md-3 col-lg-2">
 
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav navbar-right">
-				<li *ngIf="status" [routerLinkActive]="['link-active']">
-					<a [routerLink]="['/vehicles/new']">Add vehicle
-						<span class="fa fa-plus"></span>
-						<span class="fa fa-car"></span>
-					</a>
-				</li>
-				<li *ngIf="status">
-					<a (click)="logout()" [routerLink]="['/vehicles']">Logout
-					</a>
-				</li>
-				<li *ngIf="!status" [routerLinkActive]="['link-active']">
-					<a [routerLink]="['/login']">Login
-					</a>
-				</li>
-				<li *ngIf="!status" [routerLinkActive]="['link-active']">
-					<a [routerLink]="['/register']">Register
-					</a>
-				</li>
-			</ul>
+			</div>
+			<div class="col-md-9 col-lg-8">
+				<br>
+				<br>
+				<div class="hotline pull-right">
+					<span class="no-display">Need help? Call us: </span>
+					<span class="fa fa-phone"></span>
+					<a href="tel:{{contacts.phone}}"> {{contacts.phone}}</a>
+				</div>
+				<div class="clearfix"></div>
+				<div class="main-menu">
+					<div class="container1">
+						<nav class="navbar navbar-default menu">
+							<div class="navbar-header">
+								<button type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" class="navbar-toggle collapsed">
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+							</div>
+							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+								<div class="container">
+									<ul class="nav navbar-nav">
+										<li>
+											<a [routerLink]="['/']">HOME</a>
+										</li>
+										<li>
+											<a [routerLink]="['/vehicles']">CAR LISTINGS</a>
+										</li>
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CONTACT US</a>
+											<ul class="dropdown-menu">
+												<li>
+													<a target="_blank" href="{{contacts.facebookUrl}}">
+														<span class="fa fa-facebook"></span> FACEBOOK</a>
+												</li>
+												<li>
+													<a target="_blank" href="tel:{{contacts.phone}}">
+														<span class="fa fa-phone"></span> CALL US</a>
+												</li>
+												<li>
+													<a target="_blank" href="{{contacts.instagramUrl}}">
+														<span class="fa fa-instagram"></span> INSTAGRAM</a>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<a [routerLink]="['/login']" *ngIf="!status">SIGN IN</a>
+										</li>
+										<li>
+											<a [routerLink]="['/register']" *ngIf="!status">REGISTER</a>
+										</li>
+										<li>
+											<a (click)="logout()" *ngIf="status">SIGN OUT</a>
+										</li>
+										<li>
+											<a [routerLink]="['/vehicles/new']" *ngIf="status">ADD VEHICLE</a>
+										</li>
+									</ul>
+								</div>
+
+							</div>
+						</nav>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-lg-2">
+			
+			</div>
 		</div>
-		<!-- /.navbar-collapse -->
 	</div>
-	<!-- /.container-fluid -->
-</nav>
+	<br>
+	<br>
+</div>

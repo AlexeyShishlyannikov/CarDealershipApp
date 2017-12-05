@@ -8,7 +8,8 @@ import { UserService } from '../../services/user.service';
 @Component({
 	selector: 'app-vehicle-list',
 	templateUrl: './vehicle-list.component.html',
-	styleUrls: ['./vehicle-list.component.css']
+	styleUrls: ['./vehicle-list.component.css',
+							'../../styles/styles.css']
 })
 export class VehicleListComponent implements OnInit {
 	vehicles : any[];

@@ -1,7 +1,203 @@
-nav {
-	position: fixed;
-	top: 0;
-	width: 100%;
-	font-size: 10pt;
-	z-index: 1;
+.menu-bg{
+	color: white;
+}
+a{
+	text-decoration: none;
+	color: white;
+}
+.hotline{
+	margin-top: 60px;
+	position: relative;
+	height: 46px;
+	background: rgba(227, 28, 28, 0.85);
+	display: inline-block;
+	margin-right: 80px;
+	padding: 12px 20px;
+	font-size: 16px;
+	font-weight: 600;
+}
+.hotline::before{
+	position: absolute;
+	top: 0px;
+	left: -46px;
+	content: '';
+	border-width: 23px;
+	border-style: solid;
+	border-top-color: rgba(0,0,0,0);
+	border-left-color: rgba(0, 0, 0, 0);
+	border-right-color: rgba(227, 28, 28, 0.85);
+	border-bottom-color: rgba(227, 28, 28, 0.85);	
+}
+.hotline::after {
+	position: absolute;
+	top: 0px;
+	right: -46px;
+	content: '';
+	border-width: 23px;
+	border-style: solid;
+	border-right-color: rgba(0, 0, 0, 0);
+	border-top-color: rgba(0, 0, 0, 0);
+	border-left-color: rgba(227, 28, 28, 0.85);
+	border-bottom-color: rgba(227, 28, 28, 0.85);
+}
+@media (max-width: 992px) and (min-width: 768px)
+{ .main-menu {
+	margin-left: 70px;
+	}
+}
+.main-menu{
+	background: rgba(12,12,12,0.9);
+	position: relative;
+	height: 70px;
+}
+.main-menu::before{
+	position: absolute;
+	top: 0px;
+	left: -70px;
+	content: '';
+	border-width: 35px;
+	border-style: solid;
+	border-left-color: rgba(0, 0, 0, 0);
+	border-top-color: rgba(0, 0, 0, 0);
+	border-right-color: rgba(12, 12, 12, 0.9);
+	border-bottom-color: rgba(12, 12, 12, 0.9);
+}
+.menu{
+	border: none;
+	margin-bottom: 0px;
+	border-radius: 0px;
+	position: relative;
+	background: none;
+}
+.navbar{
+	min-height: 50px;
+}
+button{
+	text-decoration: none;
+	outline: none;
+}
+.navbar-collapse{
+	padding: 0px;
+}
+.menu ul{
+	background: none;
+}
+li{
+	list-style: none;
+}
+.navbar-default .navbar-nav li a{
+	padding: 25px 25px;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 15px;
+}
+.navbar-nav>li>.dropdown-menu{
+	border-radius: 0px;
+	border: none;
+	box-shadow: 0px;
+	border-top: 0px;
+	padding: 0px;
+	margin: 0px;
+	transition: all .5s ease;
+}
+.navbar-default .navbar-nav li ul li{
+	padding: 0px;
+}
+.navbar-default .navbar-nav li ul li a{
+	border-right: none;
+	padding: 12px 25px;
+}
+.navbar-default .navbar-nav li a{
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 15px;
+}
+.navbar-default .navbar-nav>li>a,
+.navbar-default .navbar-text{
+	color: white;
+}
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav>.open>a,
+.navbar-default .navbar-nav>.open>a:hover,
+.navbar-default .navbar-nav li a.active,
+.navbar-default .navbar-nav .open .dropdown-menu>li>a:hover,
+.navbar-default .navbar-nav .open .dropdown-menu>li>a:active,
+.navbar-default .navbar-nav .open .dropdown-menu>li>a:focus
+{
+	color: #d11717;
+	background: none;
+}
+.navbar-nav>li{
+	min-width: 15%;
+}
+.navbar-default .navbar-nav .open .dropdown-menu>li>a {
+	color: #333;
+	display: inline-block;
+	text-align: center;
+	background: #fff;
+	border-right: 0px;
+	border-bottom: 1px dashed #ccc;
+}
+.navbar-default .navbar-nav .open .dropdown-menu{
+	background: #fff;
+}
+@media (max-width: 767px) {
+	.hotline .no-display{
+		display: none;
+	}
+ .navbar-toggle {
+	border-radius: 0px;
+	border: none;
+	margin-top: 0px;
+	background: none;
+	width: 53px;
+	height: 50px;
+	padding: 15px;
+	position: relative;
+	z-index: 9;
+	margin-right: 0px;
+	}
+	.menu ul li{
+		text-align: center;
+	}
+	.navbar-default .navbar-nav li a,
+	.navbar-default .navbar-nav .open .dropdown-menu>li>a{
+		font-size: 20px;
+		padding: 20px;
+		color: #333;
+		display: inline-block;
+		background: #fff;
+		border-right: 0px;
+		border-bottom: 1px dashed #ccc;
+	}
+	.navbar-collapse{
+		margin: 0;
+		padding: 0;
+		background: #fff;
+	}
+		.main-menu {
+		background: none;
+		display: inline-block;
+		width: 100%;
+		margin-bottom: 40px;
+		height: 50px;
+	}
+		.hotline {
+		width: 100%;
+		height: auto;
+		height: 50px;
+		margin-top: 0px;
+		margin-bottom: -50px;
+		margin-right: 0px;
+		}
+		.navbar-default .navbar-toggle .icon-bar {
+			background-color: #fff;
+		}
+		.main-menu::before {
+			border-width: 0;
+		}
+		.hotline::after,
+		.hotline::before{
+			border-width: 0;
+		}
 }

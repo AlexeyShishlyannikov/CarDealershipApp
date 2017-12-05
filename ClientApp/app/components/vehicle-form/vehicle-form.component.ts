@@ -3,7 +3,6 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { SaveVehicle, Vehicle } from '../../models/vehicle';
 import { ActivatedRoute, Router } from '@angular/router/';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/Observable/forkJoin';
 import { PhotoService } from '../../services/photo.service';
 
 
@@ -18,7 +17,7 @@ export class VehicleFormComponent implements OnInit {
 		id: 0,
 		makeId: 0,
 		modelId: 0,
-		yearMade: 2010,
+		yearMade: 2017,
 		price: 0,
 		vinNumber: '',
 		transmissionType: '',

@@ -22,8 +22,6 @@ namespace AutoCity.Controllers
 			this.mapper = mapper;
 			this.context = context;
 		}
-		
-
 		[HttpPost]
 		public async Task<IActionResult> CreateVehicle([FromBody] VehicleResource vehicleResource)
 		{

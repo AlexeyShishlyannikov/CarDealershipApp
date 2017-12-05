@@ -22,6 +22,8 @@ import { RegistrationFormComponent } from './account/components/registration-for
 import { LoginFormComponent } from './account/components/login-form/login-form.component';
 import { AuthGuard } from './auth.guard';
 import { LocalStorage } from './helper/local-storage';
+import { TopHeaderComponent } from './components/top-header/top-header.component';
+import { JumbotronComponent } from './components/jumbotron/jumbotron.component';
 
 @NgModule({
     declarations: [
@@ -34,7 +36,9 @@ import { LocalStorage } from './helper/local-storage';
         FooterComponent,
 		MakeFormComponent,
 		RegistrationFormComponent,
-		LoginFormComponent
+		LoginFormComponent,
+		TopHeaderComponent,
+		JumbotronComponent
     ],
     imports: [
         CommonModule,
