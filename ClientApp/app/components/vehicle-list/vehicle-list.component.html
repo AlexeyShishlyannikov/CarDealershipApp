@@ -7,10 +7,10 @@
 						<div class="col-sm-4 col-md-4 col-lg-4 m-b-lg-15 p-r-lg-0 p-r-xs-15">
 							<div class="select-wrapper">
 								<div class="dropdown">
-									<button class="dropdown-toggle form-item" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="make" (change)="onMakeChange()" [(ngModel)]="selectedMake" name="selectedMake" #make="ngModel">Make</button>
+									<button class="dropdown-toggle form-item" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="make"  name="selectedMake"> <span *ngIf="selectedMake;else noMake">{{selectedMake.name}}</span> <ng-template #noMake>Make</ng-template> </button>
 									<ul class="dropdown-menu scrollable-menu">
-										<li></li>
-										<li *ngFor="let m of makes">{{m.name}}</li>
+										<li (click)="clearMake()"> Clear</li>
+										<li *ngFor="let m of makes" (click)="makeChange( m.id )" value="{{m.id}}">{{m.name}} <span class="pull-right" *ngIf="m.totalNumber"> {{m.totalNumber}}</span></li>
 									</ul>
 								</div>
 							</div>
@@ -18,10 +18,11 @@
 						<div class="col-sm-4 col-md-4 col-lg-4 m-b-lg-15 p-r-lg-0 p-r-xs-15">
 							<div class="select-wrapper">
 								<div class="dropdown">
-									<button class="dropdown-toggle form-item" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="model" (change)="filterCars()" [(ngModel)]="selectedModel" name="selectedModel" #model="ngModel">Model</button>
-									<ul class="dropdown-menu scrollable-menu">
-										<li></li>
-										<li *ngFor="let m of models"></li>
+									<button class="dropdown-toggle form-item" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="model" name="selectedModel"><span *ngIf="selectedModel;else noModel">{{selectedModel.name}}</span>
+									<ng-template #noModel>Model</ng-template></button>
+									<ul *ngIf="models.length > 0" class="dropdown-menu scrollable-menu">
+										<li (click)="clearModel()"> Clear</li>
+										<li *ngFor="let m of models" (click)="changeModel( m.id )" value="{{m.id}}">{{m.name}}</li>
 									</ul>
 								</div>
 							</div>
@@ -29,9 +30,12 @@
 						<div class="col-sm-4 col-md-4 col-lg-4 col-lg-4 m-b-lg-15 p-r-lg-0 p-r-xs-15">
 							<div class="select-wrapper">
 								<div class="dropdown">
-									<button class="dropdown-toggle form-item" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by</button>
+									<button class="dropdown-toggle form-item" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{sortingParam.name}}</button>
 									<ul class="dropdown-menu">
-										<li></li>
+										<li (click)="changeSortParam( 'Year', 'yearMade', 'desc' )" value="yearMade">Year</li>
+										<li (click)="changeSortParam( 'Price', 'price', asc )" value="price">Price</li>
+										<li (click)="changeSortParam( 'Last Update', 'lastUpdateParsed', desc )" value="lastUpdateParsed">Last Update</li>
+										<li (click)="changeSortParam( 'Mileage', 'mileage', asc )" value="mileage">Mileage</li>
 									</ul>
 								</div>
 							</div>

@@ -26,8 +26,9 @@ export class AuthGuard implements CanActivate {
 	}
 
 	isLoggedIn() {
-		this.user.authNavStatus$.subscribe(status => this.status = status);
-		console.log(this.status);
-		return this.status;
+	// 	this.user.authNavStatus$.subscribe(status => this.status = status);
+	// 	console.log(this.status);
+	// 	return this.status;
+		return true;
 	}
 }

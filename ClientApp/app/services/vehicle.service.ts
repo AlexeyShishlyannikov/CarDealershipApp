@@ -64,4 +64,23 @@ export class VehicleService {
 			vehicle.lastUpdateParsed = Date.parse(vehicle.lastUpdate);
 		});
 	}
+	public vehicleValidate(vehicle: any, validationErrors: string[]){
+		validationErrors = [];
+		if(vehicle.makeId == 0){
+			validationErrors.push('Make is not provided');
+		}
+		if(vehicle.modelId == 0){
+			validationErrors.push('Model is not provided');
+		}
+		if(vehicle.transmissionType.length == 0){
+			validationErrors.push("Transmission is not provided");
+		}
+		if(vehicle.mileage == 0){
+			validationErrors.push("Mileage is not provided");
+		}
+		if(vehicle.price == 0){
+			validationErrors.push("Price is not provided")
+		}
+		return validationErrors;
+	}
 }

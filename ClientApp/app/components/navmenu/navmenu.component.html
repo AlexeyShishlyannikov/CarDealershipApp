@@ -24,13 +24,21 @@
 								</button>
 							</div>
 							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-								<div class="container">
+								<div class="">
 									<ul class="nav navbar-nav">
 										<li>
 											<a [routerLink]="['/']">HOME</a>
 										</li>
-										<li>
-											<a [routerLink]="['/vehicles']">CAR LISTINGS</a>
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CAR LISTINGS</a>
+											<ul class="dropdown-menu">
+												<li>
+													<a [routerLink]="['/vehicles']"> VEHICLE LIST</a>
+												</li>
+												<li>
+													<a [routerLink]="['/vehicles/new']"> ADD VEHICLE</a>
+												</li>
+											</ul>
 										</li>
 										<li class="dropdown">
 											<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CONTACT US</a>
@@ -57,9 +65,6 @@
 										</li>
 										<li>
 											<a (click)="logout()" *ngIf="status">SIGN OUT</a>
-										</li>
-										<li>
-											<a [routerLink]="['/vehicles/new']" *ngIf="status">ADD VEHICLE</a>
 										</li>
 									</ul>
 								</div>

@@ -13,12 +13,22 @@ import { UserService } from '../../services/user.service';
 })
 export class VehicleListComponent implements OnInit {
 	vehicles : any[];
-	sortingParam: string;
+	sortingParam: any = {
+		param:'',
+		name: 'Order by',
+		asc: ''
+	};
 	sortAsc: string;
-	makes: any[];
-	selectedMake: any;	
-	models: any[];
-	selectedModel: any;
+	makes: any[] = [];
+	selectedMake: any = {
+		name:'Make',
+		id:0
+	};	
+	models: any[] =[];
+	selectedModel: any = {
+		name: 'Model',
+		id: 0
+	};
 	photos: any[];
 	status: boolean;
 
@@ -33,8 +43,12 @@ export class VehicleListComponent implements OnInit {
 		this.populateVehicles();
 		this.vehicleService.getMakes()
 			.subscribe(makes => {
-				this.makes = makes;
-				this.vehicleService.countMakes(this.vehicles, this.makes);
+				this.vehicleService.countMakes(this.vehicles, makes);
+				makes.forEach((m : any) => {
+					if(m.totalNumber > 0){
+						this.makes.push(m);
+					}
+				});				
 			});
 		this.userService.authNavStatus$.subscribe(status => this.status = status);
 	}
@@ -53,9 +67,16 @@ export class VehicleListComponent implements OnInit {
 		});
 	}
 
+	private changeSortParam(name:string, param : string, asc: string){
+		this.sortingParam.param = param;
+		this.sortingParam.name = name;
+		this.sortingParam.asc = asc;
+		this.onSortByChange();
+	}
+
 	public onSortByChange(){
-		var sortBy = this.sortingParam;
-		var sortAsc = this.sortAsc;
+		var sortBy = this.sortingParam.param;
+		var sortAsc = this.sortingParam.asc;
 		this.vehicleService.formatVehicleDate(this.vehicles);		
 		this.vehicles.sort(function (a, b){
 			if(sortAsc)
@@ -65,13 +86,31 @@ export class VehicleListComponent implements OnInit {
 		});
 	}
 
-	private onMakeChange(){
+	private clearMake(){
+			delete this.selectedMake;
+			delete this.selectedModel; 
 		this.populateModels();
-		delete this.selectedModel;
+			
+			this.filterCars();		
+	}
+	private makeChange(makeId: number){
+		this.selectedMake = this.makes.find(m => m.id == makeId);
+		delete this.selectedModel;		
+		this.populateModels();
 		this.filterCars();
 	}
 	
-
+	private clearModel(){
+		delete this.selectedModel;
+				
+		this.filterCars();
+		
+	}
+	private changeModel(modelId : number){
+		this.selectedModel = this.models.find(m => m.id == modelId);
+		this.filterCars();
+	}
+	
 
 	private filterCars(){
 		var selectedMake = this.selectedMake;
@@ -83,15 +122,15 @@ export class VehicleListComponent implements OnInit {
 				if (selectedMake) {
 					this.vehicles = this.vehicles.filter(function (vehicle) {
 						if (selectedModel)
-							return vehicle.model.id == selectedModel;
-						return vehicle.make.id == selectedMake;
+							return vehicle.model.id == selectedModel.id;
+						return vehicle.make.id == selectedMake.id;
 					});
 				}
 			});
 	}
 
 	private populateModels() {
-		var selectedMake = this.makes.find(m => m.id == this.selectedMake);
+		var selectedMake = this.selectedMake ? this.makes.find(m => m.id == this.selectedMake.id) : null;
 		this.models = selectedMake ? selectedMake.models : [];
 	}
 }

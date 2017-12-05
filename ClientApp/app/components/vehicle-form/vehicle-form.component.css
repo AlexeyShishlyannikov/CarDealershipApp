@@ -1,14 +1,61 @@
-
-
-#pic-div{
+.form-wrapper{
+	background-color: #fff;
+}
+.input-name{
+	color: #fff;
+	font-weight: 400;
+}
+	input[type='number'],
+input[type='text'] {
+	border: none;
+	background: #fff;
+	box-shadow: none;
+	height: 45px;
+	outline: none;
+	border-radius: 1px;
+	color: #333;
+}
+input[type='number'],
+	input[type='text'] {
+	font-size: 16px;
+}
+.btn-default{
+	background: #fff;
+	height: 45px;
+	width: 200px;
+	border-radius: 1px;
+	color: #333;
+	font-size: 16px;
+}
+.btn-default:hover{
+	background: #333;
+	color: #fff;
+	outline: none;
+	border-color: rgb(207, 0, 0);
+	transition-delay: .3s;
+	transition-duration: .5s;
+}
+#pic-div {
 	position: relative;
-	width: 50%;
 }
-#pic-div button{
+
+#pic-div button {
 	position: absolute;
-	bottom: 5px;
-	right: 5px; 
+	bottom: 5%;
+	right: 10%;
 }
-.background{
-	background-color: rgba(255,255,255,0.8);
+.btn-danger{
+	background: rgba(207, 0, 0, 0.486);
+	border-radius: 1px;
+}
+.btn-delete{
+	background: rgba(0, 0, 0, 0.719);
+	width: 200px;
+	font-size: 16px;
+	height: 45px;
+	margin-right: 5px;
+}
+.submit-form{
+	margin-top: 30px;
+	padding-top: 30px;
 }

@@ -1,4 +1,158 @@
-<div class="container background">
+<div class="form-wrapper">
+	<div class="container p-lg-30">
+		<h1 class="p-b-lg-15 p-b-sm-30">
+			<span *ngIf="!vehicle.id;else other">New</span>
+			<ng-template #other>Edit</ng-template> Vehicle
+		</h1>
+		<div class="search">
+			<form #f="ngForm" (ngSubmit)="submit()" novalidate>
+				<div class="search-option p-lg-30 p-b-lg-15 p-b-sm-30 p-r-sm-45 p-xs-15">
+					<div class="row">
+						<div class="col-sm-12 col-md-12 col-lg-12">
+							<div class="row">
+								<div class="col-sm-4 col-md-4 col-lg-4 m-b-lg-15 p-r-lg-0 p-r-xs-15">
+									<div class="select-wrapper">
+										<div class="dropdown">
+											<button class="dropdown-toggle form-item" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+											id="make" name="selectedMake">
+												<span *ngIf="selectedMake;else noMake">{{selectedMake.name}}</span>
+												<ng-template #noMake>Make*</ng-template>
+											</button>
+											<ul class="dropdown-menu scrollable-menu">
+												<li (click)="clearMake()"> Clear</li>
+												<li *ngFor="let m of makes" (click)="makeChange( m.id )" value="{{m.id}}">{{m.name}}
+													<span class="pull-right" *ngIf="m.totalNumber"> {{m.totalNumber}}</span>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4 col-md-4 col-lg-4 m-b-lg-15 p-r-lg-0 p-r-xs-15">
+									<div class="select-wrapper">
+										<div class="dropdown">
+											<button class="dropdown-toggle form-item" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+											id="model" name="selectedModel">
+												<span *ngIf="selectedModel;else noModel">{{selectedModel.name}}</span>
+												<ng-template #noModel>Model*</ng-template>
+											</button>
+											<ul *ngIf="models.length > 0" class="dropdown-menu scrollable-menu">
+												<li (click)="clearModel()"> Clear</li>
+												<li *ngFor="let m of models" (click)="changeModel( m.id )" value="{{m.id}}">{{m.name}}</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4 col-md-4 col-lg-4 m-b-lg-15 p-r-lg-0 p-r-xs-15">
+									<div class="select-wrapper">
+										<div class="dropdown">
+											<button class="dropdown-toggle form-item" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+											id="transmissionType" name="transmissionType">
+												<span *ngIf="vehicle.transmissionType;else noModel">{{vehicle.transmissionType}}</span>
+												<ng-template #noModel>Transmission*</ng-template>
+											</button>
+											<ul class="dropdown-menu scrollable-menu">
+												<li (click)="changeTransmission('Automatic')"> Automatic</li>
+												<li (click)="changeTransmission('Manual')"> Manual</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4 col-md-4 col-lg-4  p-r-lg-0 p-r-xs-15">
+									<div class="select-wrapper">
+										<div class="form-group">
+											<label for="yearMade" class="input-name">Year Made*</label>
+											<input type="number" id="yearMade" [(ngModel)]="vehicle.yearMade" class="form-control" name="yearMade" required #yearMade="ngModel">
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4 col-md-4 col-lg-4  p-r-lg-0 p-r-xs-15">
+									<div class="select-wrapper">
+										<div class="form-group">
+											<label class="input-name" for="color">Color</label>
+											<input type="text" id="color" [(ngModel)]="vehicle.color" class="form-control" name="color" #color="ngModel">
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4 col-md-4 col-lg-4  p-r-lg-0 p-r-xs-15">
+									<div class="select-wrapper">
+										<div class="form-group">
+											<label class="input-name" for="vinNumber">VIN Number*</label>
+											<input type="text" id="vinNumber" [(ngModel)]="vehicle.vinNumber" class="form-control" name="vinNumber" required #vinNumber="ngModel">
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4 col-md-4 col-lg-4 m-b-lg-15 p-r-lg-0 p-r-xs-15">
+									<div class="select-wrapper">
+										<div class="form-group">
+											<label class="input-name" for="mpg">MPG</label>
+											<input type="number" id="mpg" [(ngModel)]="vehicle.mpg" class="form-control" name="mpg" #mpg="ngModel">
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4 col-md-4 col-lg-4 m-b-lg-15 p-r-lg-0 p-r-xs-15">
+									<div class="select-wrapper">
+										<div class="form-group">
+											<label class="input-name" for="mileage">Mileage*</label>
+											<input type="number" id="mileage" [(ngModel)]="vehicle.mileage" class="form-control" name="mileage" required #mileage="ngModel">
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4 col-md-4 col-lg-4 m-b-lg-15 p-r-lg-0 p-r-xs-15">
+									<div class="select-wrapper">
+										<div class="form-group">
+											<label class="input-name" for="price">Price*</label>
+											<input type="number" id="price" [(ngModel)]="vehicle.price" class="form-control" name="price" #price="ngModel" required>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-12 col-md-12 col-lg-12 m-b-lg-15 p-r-lg-0 p-r-xs-15">
+									<div class="select-wrapper">
+										<div class="form-group">
+											<label class="input-name" for="features">Additional features</label>
+											<input type="text" id="features" [(ngModel)]="vehicle.features" class="form-control" name="features" #features="ngModel">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>
+						<p class="input-name">Photos</p>
+						<label class="btn btn-default  btn-file">
+							<div class="text-file">
+								Add Photo
+								<input style="display: none" type="file" name="fileInput" id="fileInput" class="fileInput" (change)="uploadPhoto()"
+								#fileInput>
+							</div>
+							
+						</label>
+						<br><br>
+						<div class="row">
+							<div id="pic-div" class="col-md-6 col-sm-6 col-lg-6" *ngFor="let photo of photos">
+								<img src="/uploads/{{ photo.fileName }}" class="image img-thumbnail" alt="Not loaded">
+								<button class="btn btn-danger" (click)="deletePicture(vehicle.id, photo.id)">Delete</button>
+							</div>
+						</div>
+						<div class="text-center submit-form">
+							<button class="btn btn-default text-center">Submit</button>
+							<br>
+							<br>
+							<button *ngIf="vehicle.id" class="btn btn-danger btn-delete" type="button" (click)="delete()"> Delete</button>
+						</div>
+						<div class="input-name errors" *ngIf="validationErrors.length > 0">
+							<h4>*Please fix this issues</h4>
+							<p *ngFor="let e of validationErrors">{{e}}</p>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<br><br>
+</div>
+
+
+<!-- <div class=" background">
 	<h1>
 		<span *ngIf="!vehicle.id;else other">New</span>
 		<ng-template #other>Edit</ng-template> Vehicle</h1>
@@ -82,12 +236,6 @@
 			<div class="tab-pane" role="tab-panel" id="photos">
 				<h2>Photos</h2>
 				<input type="file" name="fileInput" id="fileInput" (change)="uploadPhoto()" #fileInput required>
-				<div class="alert alert-danger" *ngIf="fileInput.touched && !fileInput.valid">Please provide the picture.</div>
-				<!-- <div class="progress" *ngIf="progress && progress.percentage < 100">
-					<div class="progress-bar" [style.width]="progress.percentage + '%'">
-						<span class="sr-only">{{progress.percentage}}% Complete</span>
-					</div>
-				</div> -->
 				<div id="pic-div" *ngFor="let photo of photos">
 					<img src="/uploads/{{ photo.fileName }}" class="image img-thumbnail" alt="Not loaded">
 					<button class="btn btn-danger" (click)="deletePicture(vehicle.id, photo.id)">Delete picture</button>
@@ -100,4 +248,4 @@
 		<a *ngIf="vehicle.id" class="btn btn-danger" type="button" (click)="delete()">Delete</a>
 	</form>
 	<br>
-</div>
+</div> -->

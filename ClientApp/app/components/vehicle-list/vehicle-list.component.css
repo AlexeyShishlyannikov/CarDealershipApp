@@ -139,14 +139,15 @@ li {
 }
 
 .picture{
-	height: 30vh;
+	height: 25vh;
+	min-height: 200px;
 }
 .picture img:hover{
 	filter: brightness(70%);
 }
 @media(max-width: 767px){
 	.picture{
-		height: 50vh;
+		height: 25vh;
 	}
 }
 .img-responsive{

@@ -9,7 +9,9 @@ import { PhotoService } from '../../services/photo.service';
 @Component({
 	selector: 'app-vehicle-form',
 	templateUrl: './vehicle-form.component.html',
-	styleUrls: ['./vehicle-form.component.css']
+	styleUrls: ['./vehicle-form.component.css',
+		'../../styles/styles.css',
+		'../vehicle-list/vehicle-list.component.css']
 })
 export class VehicleFormComponent implements OnInit {
 	@ViewChild('fileInput') fileInput: ElementRef;
@@ -26,9 +28,18 @@ export class VehicleFormComponent implements OnInit {
 		mpg: 0,
 		features: ''
 	};
-	makes : any[];
-	models : any[];
+	makes : any[] = [];
 	photos: any[];
+	selectedMake: any = {
+		name: 'Make',
+		id: 0
+	};
+	models: any[] = [];
+	selectedModel: any = {
+		name: 'Model',
+		id: 0
+	};
+	validationErrors: string[] = [];
 	constructor(
 		private vehicleService: VehicleService,
 		private route: ActivatedRoute,
@@ -63,6 +74,34 @@ export class VehicleFormComponent implements OnInit {
 			.subscribe(photos => this.photos = photos);
 	}
 
+	private clearMake() {
+		delete this.selectedMake;
+		delete this.selectedModel;
+		delete this.vehicle.makeId;
+		delete this.vehicle.modelId;
+		this.populateModels();
+	}
+	private makeChange(makeId: number) {
+		this.selectedMake = this.makes.find(m => m.id == makeId);
+		this.vehicle.makeId = this.selectedMake.id;
+		delete this.selectedModel;
+		delete this.vehicle.modelId;
+		this.populateModels();
+	}
+
+	private clearModel() {
+		delete this.selectedModel;
+		delete this.vehicle.modelId;
+		
+	}
+	private changeModel(modelId: number) {
+		this.selectedModel = this.models.find(m => m.id == modelId);
+		this.vehicle.modelId = this.selectedModel.id;		
+	}
+	private changeTransmission(transmissionType: string){
+		this.vehicle.transmissionType = transmissionType;
+	}
+
 	private setVehicle(v: Vehicle){
 		this.vehicle.makeId = v.make.id;	
 		this.vehicle.modelId = v.model.id;
@@ -82,10 +121,14 @@ export class VehicleFormComponent implements OnInit {
 	}
 	
 	private populateModels() {
-		var selectedMake = this.makes.find(m => m.id == this.vehicle.makeId);
+		var selectedMake = this.selectedMake ? this.makes.find(m => m.id == this.selectedMake.id) : null;
 		this.models = selectedMake ? selectedMake.models : [];
 	}
 	uploadPhoto() {
+		this.validationErrors = this.vehicleService.vehicleValidate(this.vehicle, this.validationErrors);
+		if (this.validationErrors.length > 0) {
+			return;
+		}
 		var nativeElement: any = this.fileInput.nativeElement;		
 		if(this.vehicle.id){
 			this.photoService.uploadPhoto(this.vehicle.id, nativeElement.files[0])
@@ -113,6 +156,10 @@ export class VehicleFormComponent implements OnInit {
 	}
 
 	submit(){
+		this.validationErrors = this.vehicleService.vehicleValidate(this.vehicle, this.validationErrors);
+		if(this.validationErrors.length > 0){
+			return ;
+		}
 		if (this.vehicle.id > 0) {
 			this.vehicleService.updateVehicle(this.vehicle.id, this.vehicle)
 				.subscribe(x =>{
