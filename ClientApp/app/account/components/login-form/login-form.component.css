@@ -1,0 +1,10 @@
+.btn-default{
+	width: 100%;
+	font-weight: bold;
+	font-size: 20px;
+	text-transform: capitalize;
+}
+.search{
+	margin-top: -50px;
+	margin-bottom: 50px;
+}

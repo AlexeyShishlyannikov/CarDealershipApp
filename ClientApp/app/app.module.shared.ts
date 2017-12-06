@@ -24,6 +24,7 @@ import { AuthGuard } from './auth.guard';
 import { LocalStorage } from './helper/local-storage';
 import { TopHeaderComponent } from './components/top-header/top-header.component';
 import { JumbotronComponent } from './components/jumbotron/jumbotron.component';
+import { NoAuthGuard } from './no-auth.guard';
 
 @NgModule({
     declarations: [
@@ -46,13 +47,13 @@ import { JumbotronComponent } from './components/jumbotron/jumbotron.component';
 		FormsModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'vehicles', pathMatch: 'full' },
-			{ path: 'vehicles/edit/:id', component: VehicleFormComponent, canActivate: [AuthGuard] },
-			{ path: 'vehicles/new', component: VehicleFormComponent, canActivate: [AuthGuard] },	
-			{ path: 'vehicles/:id', component: VehicleViewComponent },
-			{ path: 'vehicles', component: VehicleListComponent },
-			{ path: 'register', component: RegistrationFormComponent,  },
-			{ path: 'login', component: LoginFormComponent,  },
-			{ path: 'makes', component: MakeFormComponent, canActivate: [AuthGuard] },
+						{ path: 'vehicles/edit/:id', component: VehicleFormComponent, canActivate: [AuthGuard] },
+						{ path: 'vehicles/new', component: VehicleFormComponent, canActivate: [AuthGuard] },	
+						{ path: 'vehicles/:id', component: VehicleViewComponent },
+						{ path: 'vehicles', component: VehicleListComponent },
+						{ path: 'register', component: RegistrationFormComponent, canActivate: [NoAuthGuard]  },
+						{ path: 'login', component: LoginFormComponent, canActivate: [NoAuthGuard]  },
+						{ path: 'makes', component: MakeFormComponent, canActivate: [AuthGuard] },
             { path: '**', redirectTo: '' },
         ])
 	],
@@ -63,7 +64,8 @@ import { JumbotronComponent } from './components/jumbotron/jumbotron.component';
 		PhotoService,
 		UserService,
 		{ provide: LocalStorage, useValue: { getItem() { } } },
-		AuthGuard
+		AuthGuard,
+		NoAuthGuard
 	]
 })
 export class AppModuleShared {

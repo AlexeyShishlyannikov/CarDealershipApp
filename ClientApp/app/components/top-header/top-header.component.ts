@@ -5,7 +5,8 @@ import { ContactService } from '../../services/contact.service';
 @Component({
   selector: 'app-top-header',
   templateUrl: './top-header.component.html',
-  styleUrls: ['./top-header.component.css']
+	styleUrls: ['../../styles/styles.css',
+	'./top-header.component.css']
 })
 export class TopHeaderComponent implements OnInit {
 	contacts: Contact = {

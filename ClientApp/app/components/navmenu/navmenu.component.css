@@ -86,10 +86,18 @@ li{
 	list-style: none;
 }
 .navbar-default .navbar-nav li a{
-	padding: 25px 25px;
+	padding: 25px 20px;
 	text-transform: uppercase;
 	font-weight: bold;
 	font-size: 15px;
+}
+@media (min-width: 993px){
+	.navbar-default .navbar-nav li a {
+		padding: 25px 25px;
+		text-transform: uppercase;
+		font-weight: bold;
+		font-size: 15px;
+	}
 }
 .navbar-nav>li>.dropdown-menu{
 	border-radius: 0px;

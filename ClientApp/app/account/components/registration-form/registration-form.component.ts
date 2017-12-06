@@ -6,7 +6,10 @@ import { Router } from '@angular/router';
 @Component({
 	selector: 'app-registration-form',
 	templateUrl: './registration-form.component.html',
-	styleUrls: ['./registration-form.component.css']
+	styleUrls: [
+		'../../../components/vehicle-list/vehicle-list.component.css',
+		'../../../styles/styles.css',
+		'../../../components/vehicle-form/vehicle-form.component.css', './registration-form.component.css']
 })
 export class RegistrationFormComponent implements OnInit {
 	errors: string;

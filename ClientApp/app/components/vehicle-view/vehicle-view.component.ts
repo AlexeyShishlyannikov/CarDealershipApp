@@ -5,11 +5,16 @@ import { Router, ActivatedRoute } from '@angular/router';
 import * as $ from 'jquery';
 import { Contact } from '../../models/contact';
 import { ContactService } from '../../services/contact.service';
+import { Subscription } from 'rxjs';
+import { UserService } from '../../services/user.service';
 
 @Component({
 	selector: 'app-vehicle-view',
 	templateUrl: './vehicle-view.component.html',
-	styleUrls: ['./vehicle-view.component.css']
+	styleUrls: [
+	 '../../styles/styles.css',
+		'../vehicle-list/vehicle-list.component.css',
+		'../vehicle-form/vehicle-form.component.css', './vehicle-view.component.css',]
 })
 export class VehicleViewComponent implements OnInit {
 	vehicle: any ={
@@ -42,12 +47,16 @@ export class VehicleViewComponent implements OnInit {
 	};
 	photos: any[] = [];
 	vehicleId: number;
+	status: boolean;
+	subscription: Subscription;
+	
 	constructor(
 		private vehicleService: VehicleService,
 		private photoService: PhotoService,
 		private route: ActivatedRoute,
 		private router: Router,
-		private contactService: ContactService
+		private contactService: ContactService,
+		private userService: UserService
 	) {
 		route.params.subscribe(p => {
 			this.vehicleId = +p['id'];
@@ -59,6 +68,7 @@ export class VehicleViewComponent implements OnInit {
 	 }
 
 	ngOnInit() {
+		this.subscription = this.userService.authNavStatus$.subscribe(status => this.status = status);
 		this.photoService.getPhotos(this.vehicleId)
 			.subscribe(photos => this.photos = photos);
 		this.vehicleService.getVehicle(this.vehicleId)

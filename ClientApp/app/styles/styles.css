@@ -1,3 +1,10 @@
+*{
+	font-family: 'Montserrat',
+	sans-serif;	
+}
+.fa{
+  font-family: 'FontAwesome'!important;	
+}
 .m-auto {
 	margin: auto!important;
 }

@@ -1,43 +1,42 @@
-<div class="row">
-	<div class="col-md-5 col-sm-4"></div>
-	<div class="col-md-2 col-sm-4">
+<div class="row form-wrapper">
+	<div class="col-md-4 col-sm-4"></div>
+	<div class="col-md-4 col-sm-4">
 
-		<div class="card">
-			<div class="card-block">
+		<div class="search">
+			<div class="search-option p-lg-30 p-b-lg-15 p-b-sm-30 p-r-sm-45 p-xs-15">
 
-				<div *ngIf="brandNew" class="alert alert-success" role="alert">
-					<strong>All set!</strong> Please login with your account
-				</div>
-
-				<h4>Login</h4>
+				<h4 class="input-name">Login</h4>
 
 				<form #f="ngForm" novalidate (ngSubmit)="login(f)">
+					<div class="select-wrapper">
+						<div class="form-group">
+							<label for="email" class="input-name">Email</label>
+							<input id="email" type="text" required name="email" [ngModel]="credentials.email" #email="ngModel" tmFocus validateEmail
+							class="form-control" placeholder="Email">
 
-					<div class="form-group">
-						<label for="email">Email</label>
-						<input id="email" type="text" required name="email" [ngModel]="credentials.email" #email="ngModel" tmFocus validateEmail
-						 class="form-control" placeholder="Email">
-
-						<small [hidden]="email.valid || (email.pristine && !submitted)" class="text-danger">
-							Please enter a valid email
-						</small>
-
+							<small [hidden]="email.valid || (email.pristine && !submitted)" class="text-danger">
+								Please enter a valid email
+							</small>
+						</div>
 					</div>
-
-					<div class="form-group">
-						<label for="password">Password</label>
-						<input id="password" type="password" required name="password" class="form-control" placeholder="Password" ngModel>
+					
+					<div class="select-wrapper">
+						<div class="form-group">
+							<label for="password" class="input-name">Password</label>
+							<input id="password" type="password" required name="password" class="form-control" placeholder="Password" ngModel>
+						</div>
 					</div>
-
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary" [disabled]="f.invalid || isRequesting">Login</button>
+					
+					<div class="">
+						<div class=" text-center">
+							<button type="submit" class="btn btn-default text-center" [disabled]="f.invalid || isRequesting">SIGN IN</button>
+						</div>
 					</div>
-
+					
 					<div *ngIf="errors" class="alert alert-danger" role="alert">
 						<strong>Oops!</strong> {{errors}}
 					</div>
 				</form>
-
 			</div>
 		</div>
 	</div>

@@ -1,11 +1,75 @@
-.title h1,
-.title a{
-	display: inline-block;	
+.header{
+	position: relative;
+	color: #fff;
+	background: #d11717;
+	margin-top: -80px;
 }
-.title a{
-	font-size: 150%;
-	color: black;
+#myCarousel,
+	.carousel-inner {
+	height: 40vh;
+	min-height: 300px;
 }
-.background{
-	background-color: rgba(255, 255, 255, 0.8);
+.glyphicon{
+	font-size: 0%;
+}
+
+.item,
+img{
+	object-fit: cover;
+	object-position: center;
+	height: 100%!important;
+	width: 100%;
+}
+/* .img-responsive{
+	object-fit: cover;
+} */
+.car-details{
+	background: #d11717;
+}
+
+.car-details{
+	color: #fff;
+	font-size: 16px;
+}
+.car-detail{
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+
+.btn-default{
+	background: #d11717;
+	color: #fff;
+	font-size: 16px;
+	text-transform: uppercase;
+}
+.back-link{
+	color: #fff;
+	font-size: 16px;
+}
+.back-link:hover{
+	color: #333;
+	transition: .5s;
+	transition-delay: .3s;
+}
+
+@media (min-width: 767px) and (max-width: 990px) {
+	#myCarousel,
+	.carousel-inner {
+		height: 300px;
+		min-height: 300px;
+	}
+}
+@media (min-width: 430px) and (max-width: 767px) {
+	#myCarousel,
+	.carousel-inner {
+		height: 30vh;
+		max-height: 200px;
+	}
+}
+@media (max-width: 430px) {
+	#myCarousel,
+	.carousel-inner {
+		height: 25vh;
+		min-height: 150px;
+	}
 }

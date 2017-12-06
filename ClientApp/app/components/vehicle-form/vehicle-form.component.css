@@ -5,8 +5,10 @@
 	color: #fff;
 	font-weight: 400;
 }
-	input[type='number'],
-input[type='text'] {
+input[type='number'],
+	input[type='text'],
+		input[type='password']
+	{
 	border: none;
 	background: #fff;
 	box-shadow: none;
@@ -16,7 +18,8 @@ input[type='text'] {
 	color: #333;
 }
 input[type='number'],
-	input[type='text'] {
+		input[type='text'],
+	input[type='password'] {
 	font-size: 16px;
 }
 .btn-default{
@@ -58,4 +61,7 @@ input[type='number'],
 .submit-form{
 	margin-top: 30px;
 	padding-top: 30px;
+}
+.text-file{
+	padding-top: 5px;
 }

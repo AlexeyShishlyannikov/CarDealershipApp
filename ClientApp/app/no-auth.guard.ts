@@ -6,7 +6,7 @@ import { LocalStorage } from './helper/local-storage';
 import { Subscription } from 'rxjs/Subscription';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class NoAuthGuard implements CanActivate {
 	subscription: Subscription;
 	status: boolean;
 
@@ -16,11 +16,12 @@ export class AuthGuard implements CanActivate {
 		@Inject(LocalStorage) private localStorage: any
 	) { }
 	canActivate() {
-			if (!this.isLoggedIn()) {
-				this.router.navigate(['/login']);
-				return false;
-			}
-		
+		if (this.isLoggedIn()) {
+			this.router.navigate(['/']);
+			console.log(!this.isLoggedIn());
+			return false;
+		}
+
 
 		return true;
 	}
@@ -29,6 +30,5 @@ export class AuthGuard implements CanActivate {
 		this.user.authNavStatus$.subscribe(status => this.status = status);
 		console.log(this.status);
 		return this.status;
-
 	}
 }

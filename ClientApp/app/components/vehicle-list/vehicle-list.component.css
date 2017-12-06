@@ -144,6 +144,7 @@ li {
 }
 .picture img:hover{
 	filter: brightness(70%);
+	transition-duration: 1s;
 }
 @media(max-width: 767px){
 	.picture{

@@ -35,9 +35,10 @@
 												<span *ngIf="selectedModel;else noModel">{{selectedModel.name}}</span>
 												<ng-template #noModel>Model*</ng-template>
 											</button>
-											<ul *ngIf="models.length > 0" class="dropdown-menu scrollable-menu">
+											<ul  class="dropdown-menu scrollable-menu">
 												<li (click)="clearModel()"> Clear</li>
 												<li *ngFor="let m of models" (click)="changeModel( m.id )" value="{{m.id}}">{{m.name}}</li>
+												<li [routerLink]="['/makes']"> Add Model</li>
 											</ul>
 										</div>
 									</div>
@@ -47,8 +48,8 @@
 										<div class="dropdown">
 											<button class="dropdown-toggle form-item" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
 											id="transmissionType" name="transmissionType">
-												<span *ngIf="vehicle.transmissionType;else noModel">{{vehicle.transmissionType}}</span>
-												<ng-template #noModel>Transmission*</ng-template>
+												<span *ngIf="vehicle.transmissionType;else noTransmission">{{vehicle.transmissionType}}</span>
+												<ng-template #noTransmission>Transmission*</ng-template>
 											</button>
 											<ul class="dropdown-menu scrollable-menu">
 												<li (click)="changeTransmission('Automatic')"> Automatic</li>
@@ -121,9 +122,9 @@
 						<label class="btn btn-default  btn-file">
 							<div class="text-file">
 								Add Photo
+							</div>							
 								<input style="display: none" type="file" name="fileInput" id="fileInput" class="fileInput" (change)="uploadPhoto()"
 								#fileInput>
-							</div>
 							
 						</label>
 						<br><br>

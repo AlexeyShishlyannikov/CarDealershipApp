@@ -32,10 +32,14 @@
 								<div class="dropdown">
 									<button class="dropdown-toggle form-item" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{sortingParam.name}}</button>
 									<ul class="dropdown-menu">
-										<li (click)="changeSortParam( 'Year', 'yearMade', 'desc' )" value="yearMade">Year</li>
-										<li (click)="changeSortParam( 'Price', 'price', asc )" value="price">Price</li>
-										<li (click)="changeSortParam( 'Last Update', 'lastUpdateParsed', desc )" value="lastUpdateParsed">Last Update</li>
-										<li (click)="changeSortParam( 'Mileage', 'mileage', asc )" value="mileage">Mileage</li>
+										<li (click)="changeSortParam( 'Year', 'yearMade', 'asc' )" value="yearMade">Year <span class="fa fa-caret-up"></span></li>
+										<li (click)="changeSortParam( 'Year', 'yearMade', 'desc' )" value="yearMade">Year <span class="fa fa-caret-down"></span></li>
+										<li (click)="changeSortParam( 'Price', 'price', 'asc' )" value="price">Price <span class="fa fa-caret-up"></span></li>
+										<li (click)="changeSortParam( 'Price', 'price', 'desc' )" value="price">Price <span class="fa fa-caret-down"></span></li>
+										<li (click)="changeSortParam( 'Last Update', 'lastUpdateParsed', 'asc' )" value="lastUpdateParsed">Last Update <span class="fa fa-caret-up"></span></li>
+										<li (click)="changeSortParam( 'Last Update', 'lastUpdateParsed', 'desc' )" value="lastUpdateParsed">Last Update <span class="fa fa-caret-down"></span></li>
+										<li (click)="changeSortParam( 'Mileage', 'mileage', 'asc' )" value="mileage">Mileage <span class="fa fa-caret-up"></span></li>
+										<li (click)="changeSortParam( 'Mileage', 'mileage', 'desc' )" value="mileage">Mileage <span class="fa fa-caret-down"></span></li>
 									</ul>
 								</div>
 							</div>
@@ -87,81 +91,3 @@
 		<br>
 	</div>
 </div>
-
-
-
-<!-- <div class="container">
-	<div class="row margin-drop">
-		<div class="col-sm-3">
-			<div class="filter-panel">
-				<div class="well">
-					<div class="form-group">
-						<label for="make">Make</label>
-						<select id="make" class="form-control" (change)="onMakeChange()" [(ngModel)]="selectedMake" name="selectedMake" required
-						 #make="ngModel">
-							<option value=""></option>
-							<option *ngFor="let m of makes" value="{{ m.id }}">{{ m.name }}
-								<span *ngIf="m.totalNumber"> - {{m.totalNumber}}</span>
-							</option>
-						</select>
-					</div>
-					<div class="form-group" *ngIf="selectedMake">
-						<label for="model">Model</label>
-						<select id="model" (change)="filterCars()" class="form-control" [(ngModel)]="selectedModel" name="selectedModel" required
-						 #model="ngModel">
-							<option value=""></option>
-							<option *ngFor="let m of models" value="{{ m.id }}">{{ m.name }} </option>
-						</select>
-					</div>
-				</div>
-				<div class="well">
-					<div class="form-group">
-						<label for="sortBy">Sort By</label>
-						<select id="sortBy" class="form-control" (change)="onSortByChange()" [(ngModel)]="sortingParam" name="sortBy" #sortBy="ngModel">
-							<option value="yearMade">Year</option>
-							<option value="price">Price</option>
-							<option value="lastUpdateParsed">Last Update</option>
-							<option value="mileage">Mileage</option>
-						</select>
-					</div>
-					<div class="form-group" *ngIf="sortingParam">
-						<label for="sortBy">Order</label>
-						<select id="sortBy" class="form-control" (change)="onSortByChange()" [(ngModel)]="sortAsc" name="sortBy" #sortBy="ngModel">
-							<option value="desc">High to Low</option>
-							<option value="asc">Low to High</option>
-						</select>
-					</div>
-				</div>
-				<a [routerLink]="['/vehicles/new']" style="width: 100%" class="btn btn-primary">Add Vehicle</a>
-			</div>
-		</div>
-		<div class="col-sm-9">
-			<ul class="vehicleList ">
-				<li class="row vehicle-item" *ngFor="let v of vehicles">
-					<div class=" ">
-						<div class="col-md-5">
-							<div *ngIf="v.photos && v.photos[0];else noPicture" class="">
-								<img src="/uploads/{{v.photos[0].fileName}}" class="img-responsive" alt="No picture">
-							</div>
-							<ng-template #noPicture>
-								<img src="../../../assets/qt-car-thumb.jpg" class="img-responsive" alt="No picture">
-							</ng-template>
-						</div>
-						<div class="col-md-4 col-xs-6">
-							<h3 class="title">{{ v.yearMade }} {{ v.make.name }} {{ v.model.name }}</h3>
-							<p>Mileage: {{ v.mileage }}</p>
-							<p>Color: {{ v.color }}</p>
-							<p>VIN: {{ v.vinNumber }}</p>
-						</div>
-						<div class="col-md-1 col-xs-6">
-							<h3>${{v.price | number }}</h3>
-							<a class="btn btn-primary" [routerLink]="['/vehicles/', v.id]">View Details</a>
-							<br>
-							<a *ngIf="status" class="btn btn-primary" [routerLink]="['/vehicles/edit/', v.id]">Edit</a>
-						</div>
-					</div>
-				</li>
-			</ul>
-		</div>
-	</div>
-</div> -->

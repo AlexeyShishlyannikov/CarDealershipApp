@@ -8,7 +8,10 @@ import { Credentials } from '../../../models/userRegistration';
 @Component({
 	selector: 'app-login-form',
 	templateUrl: './login-form.component.html',
-	styleUrls: ['./login-form.component.css']
+	styleUrls: [
+		'../../../components/vehicle-list/vehicle-list.component.css',
+		'../../../styles/styles.css',
+		'../../../components/vehicle-form/vehicle-form.component.css','./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit, OnDestroy {
 

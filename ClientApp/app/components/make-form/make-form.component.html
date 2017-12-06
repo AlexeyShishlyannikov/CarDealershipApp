@@ -1,18 +1,51 @@
-<div class="container">
-	<form #f="ngForm" (ngSubmit)="addModel()" novalidate>
-		<div class="form-group">
-			<label for="make">Make</label>
-			<select id="make" class="form-control" (change)="onMakeChange()" [(ngModel)]="selectedMake.id" name="make" required #make="ngModel">
-				<option value=""></option>
-				<option *ngFor="let m of makes" value="{{ m.id }}">{{ m.name }}</option>
-			</select>
-			<div class="alert alert-danger" *ngIf="make.touched && !make.valid">Please specify the make.</div>
+<div class="form-wrapper">
+	<div class="container p-lg-30">
+		<h1 class="p-b-lg-15 p-b-sm-30">
+			<span>New Model</span>
+		</h1>
+		<div class="search">
+			<form #f="ngForm" (ngSubmit)="addModel()" novalidate>
+				<div class="search-option p-lg-30 p-b-lg-15 p-b-sm-30 p-r-sm-45 p-xs-15">
+					<div class="row">
+						<div class="col-sm-12 col-md-12 col-lg-12">
+							<div class="row">
+								<div class="col-sm-6 col-md-6 col-lg-6 m-t-lg-25 p-r-lg-0 p-r-xs-15">
+									<div class="select-wrapper">
+										<div class="dropdown">
+											<button class="dropdown-toggle form-item" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+											 id="make" name="selectedMake">
+												<span *ngIf="selectedMake;else noMake">{{selectedMake.name}}</span>
+												<ng-template #noMake>Make*</ng-template>
+											</button>
+											<ul class="dropdown-menu scrollable-menu">
+												<li (click)="clearMake()"> Clear</li>
+												<li *ngFor="let m of makes" (click)="makeChange( m.id )" value="{{m.id}}">{{m.name}}
+													<span class="pull-right" *ngIf="m.totalNumber"> {{m.totalNumber}}</span>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-6 col-lg-6 m-b-lg-15 p-r-lg-0 p-r-xs-15">
+									<div class="select-wrapper">
+										<div class="form-group">
+											<label for="model" class="input-name">Model Name</label>
+											<input type="text" id="model" [(ngModel)]="model.name" class="form-control" name="model">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="text-center submit-form">
+							<button class="btn btn-default text-center">Submit</button>
+						</div>
+					</div>
+				</div>
+			</form>
 		</div>
-		<div class="form-group">
-			<label for="model">Model Name</label>
-			<input type="text" id="model" [(ngModel)]="model.name" class="form-control" name="model" required>
-			<div class="alert alert-danger" *ngIf="model.touched && !model.valid">Please specify the model name.</div>
-		</div>
-		<button class="btn btn-primary">Save</button>
-	</form>
+	</div>
+	<br>
+	<br>
 </div>
