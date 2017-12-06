@@ -4,6 +4,17 @@ body{
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
+	background-position: center;
 	position: top;
 	min-height: 100vh;
 }
+	@media (max-width: 767px) {
+		body{
+		background-size: initial;
+		background-position: initial;
+		background-size: 200vh;
+		
+		/* width: */
+		background-attachment: scroll;	
+		}
+	}

@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { VehicleService } from '../../services/vehicle.service';
 import { PhotoService } from '../../services/photo.service';
 import { UserService } from '../../services/user.service';
+import { Subscription } from 'rxjs/Subscription';
+import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 
 @Component({
@@ -11,7 +13,7 @@ import { UserService } from '../../services/user.service';
 	styleUrls: ['./vehicle-list.component.css',
 							'../../styles/styles.css']
 })
-export class VehicleListComponent implements OnInit {
+export class VehicleListComponent implements OnInit, OnDestroy {
 	vehicles : any[];
 	sortingParam: any = {
 		param:'',
@@ -31,7 +33,8 @@ export class VehicleListComponent implements OnInit {
 	};
 	photos: any[];
 	status: boolean;
-
+	subscriptionVehicles: Subscription;
+	subscriptionMakes: Subscription;
 	constructor(
 		private vehicleService: VehicleService,
 		private photoService: PhotoService,
@@ -41,24 +44,30 @@ export class VehicleListComponent implements OnInit {
 
 	ngOnInit() {
 		this.populateVehicles();
-		this.vehicleService.getMakes()
-			.subscribe(makes => {
-				this.vehicleService.countMakes(this.vehicles, makes);
-				makes.forEach((m : any) => {
-					if(m.totalNumber > 0){
-						this.makes.push(m);
-					}
-				});				
-			});
 		this.userService.authNavStatus$.subscribe(status => this.status = status);
 	}
-	
+	ngOnDestroy(){
+		this.subscriptionVehicles.unsubscribe();
+		this.subscriptionMakes.unsubscribe();
+	}
 
 	public populateVehicles() {
-		this.vehicleService.getVehicles()
+		this.subscriptionVehicles = this.vehicleService.getVehicles()
 			.subscribe(vehicles => { 
 				this.vehicles = vehicles;
 				this.populatePictures();
+				this.populateMakes();
+			});
+	}
+	public populateMakes(){
+		this.subscriptionMakes = this.vehicleService.getMakes()
+			.subscribe(makes => {
+				this.vehicleService.countMakes(this.vehicles, makes);
+				makes.forEach((m: any) => {
+					if (m.totalNumber > 0) {
+						this.makes.push(m);
+					}
+				});
 			});
 	}
 	public populatePictures(){
