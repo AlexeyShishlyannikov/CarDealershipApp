@@ -19,7 +19,7 @@ export class NavMenuComponent implements OnInit, OnDestroy {
 		city: '',
 		zipCode: '',
 		facebookUrl: '',
-		InstagramUrl: ''
+		instagramUrl: ''
 	};
 	status: boolean;
 	subscription: Subscription;

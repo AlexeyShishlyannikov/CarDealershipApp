@@ -5,6 +5,9 @@
   "scripts": {
     "test": "karma start ClientApp/test/karma.conf.js"
   },
+  "engines": {
+    "node": "8.9.1"
+  },
   "dependencies": {
     "@angular/animations": "4.2.5",
     "@angular/cli": "^1.5.4",
@@ -48,7 +51,7 @@
     "to-string-loader": "1.1.5",
     "typescript": "2.4.1",
     "url-loader": "0.5.9",
-    "webpack": "2.5.1",
+    "webpack": "^2.5.1",
     "webpack-hot-middleware": "2.18.2",
     "webpack-merge": "4.1.0",
     "zone.js": "0.8.12"

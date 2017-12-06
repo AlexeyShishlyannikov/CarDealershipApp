@@ -17,7 +17,7 @@ export class FooterComponent implements OnInit {
 		city: '',
 		zipCode: '',
 		facebookUrl: '',
-		InstagramUrl: ''
+		instagramUrl: ''
 	};
 	constructor(private contactService: ContactService) { }
 

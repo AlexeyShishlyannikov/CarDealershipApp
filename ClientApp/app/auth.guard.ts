@@ -12,8 +12,7 @@ export class AuthGuard implements CanActivate {
 
 	constructor(
 		private user: UserService,
-		private router: Router,
-		@Inject(LocalStorage) private localStorage: any
+		private router: Router
 	) { }
 	canActivate() {
 			if (!this.isLoggedIn()) {
@@ -27,7 +26,7 @@ export class AuthGuard implements CanActivate {
 
 	isLoggedIn() {
 		this.user.authNavStatus$.subscribe(status => this.status = status);
-		console.log(this.status);
+
 		return this.status;
 
 	}

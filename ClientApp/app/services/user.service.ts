@@ -27,14 +27,24 @@ export class UserService {
 	private loggedIn : boolean;
 
 	constructor(
-		private http: Http,
-		@Inject(LocalStorage) private localStorage: any
+		private http: Http
 	) {
-		this.loggedIn = !!localStorage.getItem('auth_token');	
+		
 		
 		// ?? not sure if this the best way to broadcast the status but seems to resolve issue on page refresh where auth status is lost in
 		// header component resulting in authed user nav links disappearing despite the fact user is still logged in
-		this._authNavStatusSource.next(this.loggedIn);
+		this._authNavStatusSource.next(this.checkIfLoggedIn());
+	}
+
+	hasStorage(){
+		try {
+			localStorage.setItem('mod', 'mod');
+			localStorage.getItem('mod');
+			localStorage.removeItem('mod');
+			return true;
+		} catch (exception) {
+			return false;
+		}
 	}
 
 	register(email: string, password: string, firstName: string, lastName: string, location: string) {
@@ -71,6 +81,12 @@ export class UserService {
 		this._authNavStatusSource.next(false);
 	}
 
-	
+	checkIfLoggedIn(){
+		if (this.hasStorage()) {
+			this.loggedIn = localStorage.getItem('auth_token') ? true : false;
+			return this.loggedIn;
+		}
+		return false;
+	}
 }
 

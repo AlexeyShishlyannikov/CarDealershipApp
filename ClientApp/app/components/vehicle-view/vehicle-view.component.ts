@@ -43,7 +43,7 @@ export class VehicleViewComponent implements OnInit {
 		city: '',
 		zipCode: '',
 		facebookUrl: '',
-		InstagramUrl: ''
+		instagramUrl: ''
 	};
 	photos: any[] = [];
 	vehicleId: number;

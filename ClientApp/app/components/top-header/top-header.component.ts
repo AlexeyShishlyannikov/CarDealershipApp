@@ -17,7 +17,7 @@ export class TopHeaderComponent implements OnInit {
 		city: '',
 		zipCode: '',
 		facebookUrl: '',
-		InstagramUrl: ''
+		instagramUrl: ''
 	};
 	constructor(private contactService: ContactService) { }
 

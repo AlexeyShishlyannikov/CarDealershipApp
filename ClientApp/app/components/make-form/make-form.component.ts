@@ -49,10 +49,10 @@ export class MakeFormComponent implements OnInit {
 		this.model.makeId = this.selectedMake.id;
 	}
 
-	private clearMake() {
+	public clearMake() {
 		delete this.selectedMake;
 	}
-	private makeChange(makeId: number) {
+	public makeChange(makeId: number) {
 		this.selectedMake = this.makes.find(m => m.id == makeId);
 		this.onMakeChange();
 	}

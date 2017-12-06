@@ -67,21 +67,21 @@ export class VehicleFormComponent implements OnInit {
 				this.populateModels();
 			}, err => {
 				if(err.status == 404){
-					this.router.navigate(['/home']);
+					this.router.navigate(['/vehicles']);
 				}
 			});
 		this.photoService.getPhotos(this.vehicle.id)
 			.subscribe(photos => this.photos = photos);
 	}
 
-	private clearMake() {
+	public clearMake() {
 		delete this.selectedMake;
 		delete this.selectedModel;
 		delete this.vehicle.makeId;
 		delete this.vehicle.modelId;
 		this.populateModels();
 	}
-	private makeChange(makeId: number) {
+	public makeChange(makeId: number) {
 		this.selectedMake = this.makes.find(m => m.id == makeId);
 		this.vehicle.makeId = this.selectedMake.id;
 		delete this.selectedModel;
@@ -89,22 +89,24 @@ export class VehicleFormComponent implements OnInit {
 		this.populateModels();
 	}
 
-	private clearModel() {
+	public clearModel() {
 		delete this.selectedModel;
 		delete this.vehicle.modelId;
 		
 	}
-	private changeModel(modelId: number) {
+	public changeModel(modelId: number) {
 		this.selectedModel = this.models.find(m => m.id == modelId);
 		this.vehicle.modelId = this.selectedModel.id;		
 	}
-	private changeTransmission(transmissionType: string){
+	public changeTransmission(transmissionType: string){
 		this.vehicle.transmissionType = transmissionType;
 	}
 
-	private setVehicle(v: Vehicle){
-		this.vehicle.makeId = v.make.id;	
+	public setVehicle(v: Vehicle){
+		this.vehicle.makeId = v.make.id;
+		this.selectedMake = v.make;	
 		this.vehicle.modelId = v.model.id;
+		this.selectedModel = v.model;
 		this.vehicle.yearMade = v.yearMade;
 		this.vehicle.price = v.price;
 		this.vehicle.vinNumber = v.vinNumber;
@@ -120,7 +122,7 @@ export class VehicleFormComponent implements OnInit {
 		delete this.vehicle.modelId;
 	}
 	
-	private populateModels() {
+	public populateModels() {
 		var selectedMake = this.selectedMake ? this.makes.find(m => m.id == this.selectedMake.id) : null;
 		this.models = selectedMake ? selectedMake.models : [];
 	}
@@ -145,7 +147,7 @@ export class VehicleFormComponent implements OnInit {
 						});
 				});
 			
-			this.router.navigate([`/`]);
+			this.router.navigate([`/vehicles`]);
 		}
 		
 	}

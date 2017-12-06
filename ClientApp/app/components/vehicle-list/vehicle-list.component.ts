@@ -54,20 +54,20 @@ export class VehicleListComponent implements OnInit {
 	}
 	
 
-	private populateVehicles() {
+	public populateVehicles() {
 		this.vehicleService.getVehicles()
 			.subscribe(vehicles => { 
 				this.vehicles = vehicles;
 				this.populatePictures();
 			});
 	}
-	private populatePictures(){
+	public populatePictures(){
 		this.vehicles.forEach(vehicle => {
 			this.photoService.getPhotos(vehicle.id).subscribe(photos => vehicle.photos = photos);
 		});
 	}
 
-	private changeSortParam(name:string, param : string, asc: string){
+	public changeSortParam(name:string, param : string, asc: string){
 		this.sortingParam.param = param;
 		this.sortingParam.name = name;
 		this.sortingParam.asc = asc;
@@ -86,33 +86,33 @@ export class VehicleListComponent implements OnInit {
 		});
 	}
 
-	private clearMake(){
+	public clearMake(){
 			delete this.selectedMake;
 			delete this.selectedModel; 
 		this.populateModels();
 			
 			this.filterCars();		
 	}
-	private makeChange(makeId: number){
+	public makeChange(makeId: number){
 		this.selectedMake = this.makes.find(m => m.id == makeId);
 		delete this.selectedModel;		
 		this.populateModels();
 		this.filterCars();
 	}
 	
-	private clearModel(){
+	public clearModel(){
 		delete this.selectedModel;
 				
 		this.filterCars();
 		
 	}
-	private changeModel(modelId : number){
+	public changeModel(modelId : number){
 		this.selectedModel = this.models.find(m => m.id == modelId);
 		this.filterCars();
 	}
 	
 
-	private filterCars(){
+	public filterCars(){
 		var selectedMake = this.selectedMake;
 		var selectedModel = this.selectedModel;
 		this.vehicleService.getVehicles()
@@ -129,7 +129,7 @@ export class VehicleListComponent implements OnInit {
 			});
 	}
 
-	private populateModels() {
+	public populateModels() {
 		var selectedMake = this.selectedMake ? this.makes.find(m => m.id == this.selectedMake.id) : null;
 		this.models = selectedMake ? selectedMake.models : [];
 	}

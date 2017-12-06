@@ -6,5 +6,5 @@ export interface Contact{
 	city: string,
 	zipCode: string,
 	facebookUrl: string,
-	InstagramUrl: string
+	instagramUrl: string
 }
