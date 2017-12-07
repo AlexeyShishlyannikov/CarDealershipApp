@@ -44,8 +44,8 @@ input[type='number'],
 
 #pic-div button {
 	position: absolute;
-	bottom: 5%;
-	right: 10%;
+	bottom: 0px;
+	right: 15px;
 }
 .btn-danger{
 	background: rgba(207, 0, 0, 0.486);
@@ -64,4 +64,7 @@ input[type='number'],
 }
 .text-file{
 	padding-top: 5px;
+}
+.picture{
+	margin-bottom: 10px;
 }

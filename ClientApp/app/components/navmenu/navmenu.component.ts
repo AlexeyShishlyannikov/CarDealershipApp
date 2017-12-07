@@ -7,7 +7,7 @@ import { Contact } from '../../models/contact';
 @Component({
     selector: 'nav-menu',
     templateUrl: './navmenu.component.html',
-	styleUrls: ['../../styles/styles.css',
+	styleUrls: [
 	'./navmenu.component.css']
 })
 export class NavMenuComponent implements OnInit, OnDestroy {

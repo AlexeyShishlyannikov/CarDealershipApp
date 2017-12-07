@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 	templateUrl: './registration-form.component.html',
 	styleUrls: [
 		'../../../components/vehicle-list/vehicle-list.component.css',
-		'../../../styles/styles.css',
 		'../../../components/vehicle-form/vehicle-form.component.css', './registration-form.component.css']
 })
 export class RegistrationFormComponent implements OnInit {
@@ -39,7 +38,7 @@ export class RegistrationFormComponent implements OnInit {
 						email:value.email}});
 						}
 					},
-					err => this.errors = err
+				err => this.errors = "Invalid inputs"
 				)
 		}
 	}

@@ -21,7 +21,6 @@ import { BaseService } from './services/base.service';
 import { RegistrationFormComponent } from './account/components/registration-form/registration-form.component';
 import { LoginFormComponent } from './account/components/login-form/login-form.component';
 import { AuthGuard } from './auth.guard';
-import { LocalStorage } from './helper/local-storage';
 import { TopHeaderComponent } from './components/top-header/top-header.component';
 import { JumbotronComponent } from './components/jumbotron/jumbotron.component';
 import { NoAuthGuard } from './no-auth.guard';
@@ -35,16 +34,17 @@ import { NoAuthGuard } from './no-auth.guard';
         VehicleFormComponent,
         VehicleViewComponent,
         FooterComponent,
-		MakeFormComponent,
-		RegistrationFormComponent,
-		LoginFormComponent,
-		TopHeaderComponent,
-		JumbotronComponent
+				MakeFormComponent,
+				RegistrationFormComponent,
+				LoginFormComponent,
+				TopHeaderComponent,
+				JumbotronComponent
     ],
     imports: [
         CommonModule,
         HttpModule,
-		FormsModule,
+				FormsModule,
+				
         RouterModule.forRoot([
             { path: '', redirectTo: 'vehicles', pathMatch: 'full' },
 						{ path: 'vehicles/edit/:id', component: VehicleFormComponent, canActivate: [AuthGuard] },
@@ -63,7 +63,6 @@ import { NoAuthGuard } from './no-auth.guard';
 		ContactService,
 		PhotoService,
 		UserService,
-		{ provide: LocalStorage, useValue: { getItem() { } } },
 		AuthGuard,
 		NoAuthGuard
 	]

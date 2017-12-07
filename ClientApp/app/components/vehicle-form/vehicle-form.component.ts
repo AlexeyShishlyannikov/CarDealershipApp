@@ -10,7 +10,6 @@ import { PhotoService } from '../../services/photo.service';
 	selector: 'app-vehicle-form',
 	templateUrl: './vehicle-form.component.html',
 	styleUrls: ['./vehicle-form.component.css',
-		'../../styles/styles.css',
 		'../vehicle-list/vehicle-list.component.css']
 })
 export class VehicleFormComponent implements OnInit {
@@ -136,7 +135,7 @@ export class VehicleFormComponent implements OnInit {
 			this.photoService.uploadPhoto(this.vehicle.id, nativeElement.files[0])
 				.subscribe(photo => {
 					this.photos.push(photo);
-				});
+				});		
 		} else {
 			this.vehicleService.addVehicle(this.vehicle)
 				.subscribe(vehicle => {
@@ -145,9 +144,10 @@ export class VehicleFormComponent implements OnInit {
 						.subscribe(photo => {
 							this.photos.push(photo);
 						});
+					this.router.navigate([`/vehicles/edit/${vehicle.id}`]);
+					
 				});
 			
-			this.router.navigate([`/vehicles`]);
 		}
 		
 	}

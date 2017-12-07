@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 	templateUrl: './make-form.component.html',
 	styleUrls: ['./make-form.component.css',
 		'../vehicle-list/vehicle-list.component.css',
-		'../../styles/styles.css',
 		'../vehicle-form/vehicle-form.component.css']
 })
 export class MakeFormComponent implements OnInit {

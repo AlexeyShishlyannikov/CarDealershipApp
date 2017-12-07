@@ -42,7 +42,7 @@ namespace CarDealershipApp.Controllers
 			var identity = await GetClaimsIdentity(credentials.UserName, credentials.Password);
 			if (identity == null)
 			{
-				return BadRequest(Errors.AddErrorToModelState("login_failure", "Invalid username or password.", ModelState));
+				return BadRequest("Invalid username or password.");
 			}
 
 			// Serialize and return the response

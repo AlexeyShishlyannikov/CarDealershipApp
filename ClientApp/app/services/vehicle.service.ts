@@ -1,5 +1,5 @@
 import { Http } from '@angular/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { Vehicle, SaveVehicle } from '../models/vehicle';
 import { Model } from '../models/model';
@@ -8,21 +8,23 @@ import { PhotoService } from './photo.service';
 
 @Injectable()
 export class VehicleService {
+	// originUrl: string = "http://localhost:50181";
+	originUrl: string = 'http://autocity1.azurewebsites.net';
 
 	constructor(
 		private http: Http,
-		private photoService: PhotoService
+		private photoService: PhotoService,
 	) { }
 
 	// Makes Method
 	public getMakes(){
-		return this.http.get("/api/makes/")
+		return this.http.get(`${this.originUrl }/api/makes/`)
 		.map(res => res.json());
 	}
 
 	// Multiple Vehicle Methods
 	public getVehicles(){
-		return this.http.get("/api/vehicles/")
+		return this.http.get(`${this.originUrl }/api/vehicles/`)
 			.map(res => res.json());
 	}
 
@@ -39,15 +41,15 @@ export class VehicleService {
 
 	// Single Vehicle Methods
 	public getVehicle(id: number){
-		return this.http.get(`/api/vehicles/${id}`)
+		return this.http.get(`${this.originUrl }/api/vehicles/${id}`)
 			.map(res => res.json());
 	}
 	public updateVehicle(id: number, vehicle: SaveVehicle){
-		return this.http.put(`/api/vehicles/${id}`, vehicle)
+		return this.http.put(`${this.originUrl }/api/vehicles/${id}`, vehicle)
 			.map(res => res.json());
 	}
 	public addVehicle(vehicle: SaveVehicle) {
-		return this.http.post(`/api/vehicles/`, vehicle)
+		return this.http.post(`${this.originUrl }/api/vehicles/`, vehicle)
 			.map(res => res.json());
 	}
 	public deleteVehicle(id: number){
@@ -57,7 +59,7 @@ export class VehicleService {
 					.subscribe();
 			});
 		});
-		return this.http.delete(`/api/vehicles/${id}`);
+		return this.http.delete(`${this.originUrl }/api/vehicles/${id}`);
 	}
 	public formatVehicleDate(vehicles: any[]){
 		vehicles.forEach(vehicle => {

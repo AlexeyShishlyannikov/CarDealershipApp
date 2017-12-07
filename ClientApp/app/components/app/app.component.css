@@ -12,7 +12,7 @@ body{
 		body{
 		background-size: initial;
 		background-position: initial;
-		background-size: 200vh;
+		background-size: 200vh 200vh;
 		
 		/* width: */
 		background-attachment: scroll;	

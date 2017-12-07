@@ -5,7 +5,7 @@ import { Contact } from '../../models/contact';
 @Component({
 	selector: 'app-footer',
 	templateUrl: './footer.component.html',
-	styleUrls: ['../../styles/styles.css',
+	styleUrls: [
 	'./footer.component.css']
 })
 export class FooterComponent implements OnInit {

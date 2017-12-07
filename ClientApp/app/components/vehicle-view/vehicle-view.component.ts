@@ -12,7 +12,6 @@ import { UserService } from '../../services/user.service';
 	selector: 'app-vehicle-view',
 	templateUrl: './vehicle-view.component.html',
 	styleUrls: [
-	 '../../styles/styles.css',
 		'../vehicle-list/vehicle-list.component.css',
 		'../vehicle-form/vehicle-form.component.css', './vehicle-view.component.css',]
 })
@@ -34,16 +33,6 @@ export class VehicleViewComponent implements OnInit {
 		color: '',
 		mpg: 0,
 		features: ''
-	};
-	contacts: Contact = {
-		id: 0,
-		contactName: '',
-		phone: '',
-		street: '',
-		city: '',
-		zipCode: '',
-		facebookUrl: '',
-		instagramUrl: ''
 	};
 	photos: any[] = [];
 	vehicleId: number;
@@ -69,23 +58,27 @@ export class VehicleViewComponent implements OnInit {
 
 	ngOnInit() {
 		this.subscription = this.userService.authNavStatus$.subscribe(status => this.status = status);
+		this.populatePhotos();
+		this.populateVehicles();
+		
+	}
+	private populatePhotos(){
 		this.photoService.getPhotos(this.vehicleId)
 			.subscribe(photos => this.photos = photos);
+	}
+	private populateVehicles(){
 		this.vehicleService.getVehicle(this.vehicleId)
-			.subscribe(vehicle =>{
+			.subscribe(vehicle => {
 				this.vehicle = vehicle;
-				$('.item').first().addClass("active");
 			},
 			err => {
-				if(err.status == 404){
+				if (err.status == 404) {
 					this.router.navigate(['/vehicles']);
 					return;
 				}
 			});
-			this.contactService.getContacts()
-				.subscribe(c => this.contacts = c);
+		$('.item').first().addClass("active");
+		
 	}
-
-	
 
 }

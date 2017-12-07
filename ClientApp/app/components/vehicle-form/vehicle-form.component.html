@@ -129,8 +129,8 @@
 						</label>
 						<br><br>
 						<div class="row">
-							<div id="pic-div" class="col-md-6 col-sm-6 col-lg-6" *ngFor="let photo of photos">
-								<img src="/uploads/{{ photo.fileName }}" class="image img-thumbnail" alt="Not loaded">
+							<div id="pic-div" class=" picture col-md-6 col-sm-6 col-lg-6" *ngFor="let photo of photos">
+								<img src="/uploads/{{ photo.fileName }}" class="image img-responsive" alt="Not loaded">
 								<button class="btn btn-danger" (click)="deletePicture(vehicle.id, photo.id)">Delete</button>
 							</div>
 						</div>

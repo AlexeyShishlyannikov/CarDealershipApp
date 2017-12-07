@@ -19,6 +19,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Http;
 
 namespace AutoCity
 {
@@ -86,8 +87,8 @@ namespace AutoCity
 				options.Audience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)];
 				options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
 			});
-			
 
+            services.AddMemoryCache();
 			services.AddMvc();
 		}
 
@@ -97,18 +98,23 @@ namespace AutoCity
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
-				// app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
-				// {
-				// 	HotModuleReplacement = true
-				// });
+				//app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
+				//{
+				//	HotModuleReplacement = true
+				//});
 			}
 			else
 			{
 				app.UseExceptionHandler("/Home/Error");
 			}
-			
-
-			app.UseStaticFiles();
+            
+			app.UseStaticFiles(new StaticFileOptions()
+            {
+                OnPrepareResponse = ctx =>
+                {
+                    ctx.Context.Response.Headers.Append("Cache-Control", "public,max-age=600");
+                }
+            });
 			
 			app.UseAuthentication();
 			

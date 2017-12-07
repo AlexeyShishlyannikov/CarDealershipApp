@@ -1,19 +1,23 @@
 import { Contact } from './../models/contact';
 import { Http } from '@angular/http/';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 
 @Injectable()
 export class ContactService {
+	// originUrl: string = "http://localhost:50181";
+	originUrl: string = 'http://autocity1.azurewebsites.net';
 
-	constructor(private http: Http) { }
+	constructor(
+		private http: Http,
+	) { }
 
 	public getContacts(){
-		return this.http.get("/api/contacts/")
+		return this.http.get(`${this.originUrl }/api/contacts/`)
 			.map(res => res.json());
 	}
 
 	public updateContacts(contacts: Contact) {
-		return this.http.put("/api/contacts/", contacts)
+		return this.http.put(`${this.originUrl }/api/contacts/`, contacts)
 			.map(res => res.json());
 	}
 }

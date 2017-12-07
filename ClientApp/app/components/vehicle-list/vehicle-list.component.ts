@@ -4,16 +4,16 @@ import { VehicleService } from '../../services/vehicle.service';
 import { PhotoService } from '../../services/photo.service';
 import { UserService } from '../../services/user.service';
 import { Subscription } from 'rxjs/Subscription';
-import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import { OnDestroy, OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 
 
 @Component({
 	selector: 'app-vehicle-list',
 	templateUrl: './vehicle-list.component.html',
 	styleUrls: ['./vehicle-list.component.css',
-							'../../styles/styles.css']
+							]
 })
-export class VehicleListComponent implements OnInit, OnDestroy {
+export class VehicleListComponent implements OnInit, OnDestroy,OnChanges {
 	vehicles : any[];
 	sortingParam: any = {
 		param:'',
@@ -42,13 +42,16 @@ export class VehicleListComponent implements OnInit, OnDestroy {
 	) {
 	 }
 
+	ngOnChanges(){
+		this.populateVehicles();
+	}
+	
 	ngOnInit() {
 		this.populateVehicles();
 		this.userService.authNavStatus$.subscribe(status => this.status = status);
 	}
 	ngOnDestroy(){
 		this.subscriptionVehicles.unsubscribe();
-		this.subscriptionMakes.unsubscribe();
 	}
 
 	public populateVehicles() {

@@ -10,7 +10,6 @@ import { Credentials } from '../../../models/userRegistration';
 	templateUrl: './login-form.component.html',
 	styleUrls: [
 		'../../../components/vehicle-list/vehicle-list.component.css',
-		'../../../styles/styles.css',
 		'../../../components/vehicle-form/vehicle-form.component.css','./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit, OnDestroy {
@@ -53,7 +52,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
 						this.router.navigate(['/vehicles']);
 					}
 				},
-				error => this.errors = error);
+				error => this.errors = "Invalid username or password.");
 		}
 	}
 }

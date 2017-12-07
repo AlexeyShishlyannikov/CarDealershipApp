@@ -7,7 +7,6 @@ import { BaseService } from "./base.service";
 
 import { Observable } from 'rxjs/Rx';
 import { BehaviorSubject } from 'rxjs/Rx';
-import { LocalStorage } from '../helper/local-storage';
 //import * as _ from 'lodash';
 
 // Add the RxJS Observable operators we need in this app.
@@ -17,8 +16,9 @@ import { LocalStorage } from '../helper/local-storage';
 
 export class UserService {
 
-	baseUrl: string = '/api';
-
+	// baseUrl: string = 'http://localhost:50181/api';
+	baseUrl: string = 'http://autocity1.azurewebsites.net/api';
+	
 	// Observable navItem source
 	private _authNavStatusSource = new BehaviorSubject<boolean>(false);
 	// Observable navItem stream
